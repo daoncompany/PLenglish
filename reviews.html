@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>수강후기 | PL영어학원</title>
+<meta name="description" content="PL영어학원 수강생들이 직접 남긴 생생한 수강후기입니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="page-reviews">
+<header class="hd" id="hd">
+  <div class="hd-inner">
+    <a href="index.html" class="logo"><span class="logo-mark">PL</span><span class="logo-txt">영어학원</span></a>
+    <nav class="gnb" id="gnb">
+      <ul>
+        <li><a href="conversation.html">영어회화</a></li>
+        <li><a href="toeic.html">토익</a></li>
+        <li><a href="toeic-speaking.html">토익스피킹</a></li>
+        <li><a href="opic.html">오픽</a></li>
+        <li><a href="ielts.html">아이엘츠</a></li>
+        <li><a href="toefl.html">토플</a></li>
+        <li><a href="reviews.html" class="on">수강후기</a></li>
+        <li><a href="contact.html">문의하기</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-red gnb-cta">무료 상담 문의</a>
+    </nav>
+    <div class="hd-util">
+      <a href="tel:0000000000" class="hd-tel"><b>000-0000-0000</b><em>평일 10:00 ~ 22:00</em></a>
+      <a href="contact.html" class="btn btn-red btn-sm">상담 문의</a>
+      <button type="button" class="ham" id="ham" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero hero-sm">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="inner hero-inner">
+      <div class="hero-copy">
+        <span class="hero-badge">REVIEW</span>
+        <!-- 타이틀 후킹문구 -->
+        <h1 class="hero-title">먼저 다녀간 분들의<br>진짜 후기를 확인하세요</h1>
+        <!-- 서브 보조문구 -->
+        <p class="hero-sub">수강생이 직접 남긴 기록</p>
+        <ul class="hero-chips">
+          <li>누적 후기 100건 이상</li>
+          <li>재학생 · 수료생 직접 작성</li>
+          <li>누구나 열람 가능</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-board">
+    <div class="inner">
+      <!-- 목록 -->
+      <div class="board" id="boardList">
+        <p class="board-status" id="boardStatus" hidden></p>
+        <div class="board-top">
+          <p class="board-count">전체 <b id="totalCount">0</b>건</p>
+          <div class="board-search">
+            <label for="searchInput" class="blind">후기 검색</label>
+            <input type="search" id="searchInput" placeholder="제목 · 작성자 검색">
+            <button type="button" id="searchBtn" class="btn btn-dark btn-sm">검색</button>
+          </div>
+        </div>
+
+        <table class="bd-table">
+          <caption class="blind">수강후기 목록</caption>
+          <colgroup><col style="width:80px"><col><col style="width:130px"><col style="width:120px"><col style="width:90px"></colgroup>
+          <thead>
+            <tr><th scope="col">번호</th><th scope="col">제목</th><th scope="col">글쓴이</th><th scope="col">등록일</th><th scope="col">조회</th></tr>
+          </thead>
+          <tbody id="boardBody"></tbody>
+        </table>
+
+        <div class="bd-paging" id="paging"></div>
+
+        <div class="bd-btns">
+          <a href="#" class="btn btn-red" id="writeBtn">후기 작성하기</a>
+        </div>
+      </div>
+
+      <!-- 상세 -->
+      <div class="board bd-view" id="boardView" hidden>
+        <div class="bd-view-head">
+          <h2 id="viewTitle"></h2>
+          <ul class="bd-meta">
+            <li>글쓴이 <b id="viewWriter"></b></li>
+            <li>등록일 <b id="viewDate"></b></li>
+            <li>조회 <b id="viewHit"></b></li>
+          </ul>
+        </div>
+        <div class="bd-view-body" id="viewBody"></div>
+        <div class="bd-view-nav" id="viewNav"></div>
+        <div class="bd-btns">
+          <a href="#" class="btn btn-line" id="backBtn">목록으로</a>
+          <!-- 본인이 작성한 글에서만 노출됩니다 -->
+          <button type="button" class="btn btn-line" id="editBtn" hidden>수정</button>
+          <button type="button" class="btn btn-line btn-del" id="delBtn" hidden>삭제</button>
+          <a href="contact.html" class="btn btn-red">수업 문의하기</a>
+        </div>
+      </div>
+
+      <!-- 글쓰기 -->
+      <div class="board bd-write" id="boardWrite" hidden>
+        <div class="form-head">
+          <span class="sec-label" id="writeLabel">WRITE</span>
+          <h2 id="writeTitle">수강후기 작성</h2>
+          <p id="writeDesc">수업을 들으며 느낀 점을 자유롭게 남겨주세요. 작성하신 후기는 목록 맨 위에 등록됩니다.</p>
+        </div>
+        <form id="reviewForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="rWriter">글쓴이 <em class="req">*</em></label>
+              <input type="text" id="rWriter" placeholder="이름 또는 닉네임" maxlength="20" required>
+              <p class="err" data-for="rWriter"></p>
+            </div>
+            <div class="field">
+              <label for="rPass">비밀번호 <em class="req">*</em></label>
+              <input type="password" id="rPass" placeholder="4자 이상" maxlength="20" autocomplete="new-password" required>
+              <p class="err" data-for="rPass"></p>
+              <p class="field-help" id="passHelp">글을 수정 · 삭제할 때 필요합니다. 잊지 않도록 기억해 주세요.</p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="rTitle">제목 <em class="req">*</em></label>
+            <input type="text" id="rTitle" placeholder="제목을 입력해 주세요" maxlength="60" required>
+            <p class="err" data-for="rTitle"></p>
+          </div>
+          <div class="field">
+            <label for="rContent">내용 <em class="req">*</em></label>
+            <textarea id="rContent" rows="12" placeholder="어떤 수업을 들으셨는지, 어떤 점이 좋았는지 적어주세요." required></textarea>
+            <p class="err" data-for="rContent"></p>
+          </div>
+          <div class="form-btns">
+            <button type="submit" class="btn btn-red btn-lg" id="submitBtn">등록하기</button>
+            <a href="#" class="btn btn-line btn-lg" id="cancelWrite">취소</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- 비밀번호 확인 -->
+      <div class="pw-modal" id="pwModal" hidden>
+        <div class="pw-dim" id="pwDim"></div>
+        <div class="pw-box" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+          <h3 id="pwTitle">비밀번호 확인</h3>
+          <p id="pwDesc">글 작성 시 입력하신 비밀번호를 입력해 주세요.</p>
+          <label for="pwInput" class="blind">비밀번호</label>
+          <input type="password" id="pwInput" placeholder="비밀번호" autocomplete="current-password" maxlength="20">
+          <p class="err" data-for="pwInput"></p>
+          <div class="pw-btns">
+            <button type="button" class="btn btn-red" id="pwOk">확인</button>
+            <button type="button" class="btn btn-line" id="pwCancel">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="quick" id="quick">
+  <a href="contact.html" class="q-main">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>문의<br>하기</span>
+  </a>
+  <a href="#" class="q-item kakao"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.9 3 2.8 6.3 2.8 10.3c0 2.6 1.7 4.8 4.3 6.1l-1 3.6 3.9-2.2c.7.1 1.3.2 2 .2 5.1 0 9.2-3.3 9.2-7.7S17.1 3 12 3z"/></svg><span>카톡상담</span></a>
+  <a href="tel:0000000000" class="q-item q-hide-mo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>전화문의</span></a>
+  <a href="reviews.html" class="q-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg><span>수강후기</span></a>
+  <button type="button" class="q-top" id="qtop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg><span>TOP</span></button>
+</div>
+
+<div class="mo-bar">
+  <a href="tel:0000000000" class="mo-tel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>전화 상담</a>
+  <a href="contact.html" class="mo-cta">무료 상담 문의하기</a>
+</div>
+<footer class="ft">
+  <div class="inner">
+    <div class="ft-top">
+      <a href="index.html" class="logo ft-logo"><span class="logo-mark">PL</span><span class="logo-txt">영어학원</span></a>
+      <nav class="ft-nav">
+        <a href="conversation.html">영어회화</a>
+        <a href="toeic.html">토익</a>
+        <a href="toeic-speaking.html">토익스피킹</a>
+        <a href="opic.html">오픽</a>
+        <a href="ielts.html">아이엘츠</a>
+        <a href="toefl.html">토플</a>
+        <a href="reviews.html">수강후기</a>
+        <a href="contact.html">문의하기</a>
+      </nav>
+    </div>
+    <div class="ft-info">
+      <p>상호 PL영어학원 &nbsp;|&nbsp; 대표 000 &nbsp;|&nbsp; 사업자등록번호 000-00-00000</p>
+      <p>주소 00시 00구 00로 000, 0층 &nbsp;|&nbsp; 대표전화 000-0000-0000 &nbsp;|&nbsp; 운영시간 평일 10:00~22:00 / 토 10:00~17:00</p>
+      <p class="ft-copy">&copy; PL영어학원. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/reviews-data.js"></script>
+<script src="assets/js/reviews.js"></script>
+</body>
+</html>
