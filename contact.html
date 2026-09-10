@@ -63,18 +63,14 @@
             </div>
 
             <div class="field">
-              <label for="fCallTime">Call time <span>(통화가능시간)</span></label>
-              <select id="fCallTime" name="callTime">
-                <option value="">선택해 주세요 (선택 사항)</option>
-                <option value="언제든 가능">언제든 가능</option>
-                <option value="오전 10:00~12:00">오전 10:00 ~ 12:00</option>
-                <option value="점심 12:00~14:00">점심 12:00 ~ 14:00</option>
-                <option value="오후 14:00~18:00">오후 14:00 ~ 18:00</option>
-                <option value="저녁 18:00~22:00">저녁 18:00 ~ 22:00</option>
-                <option value="토요일 10:00~17:00">토요일 10:00 ~ 17:00</option>
-              </select>
-              <p class="field-hint">전화 상담을 원하시면 통화하기 편한 시간대를 골라주세요.</p>
-              <p class="err" data-for="fCallTime"></p>
+              <label for="fCallFrom">Call time <span>(통화가능시간)</span></label>
+              <div class="time-range">
+                <select id="fCallFrom" name="callFrom" aria-label="통화가능시간 시작"></select>
+                <span class="time-sep" aria-hidden="true">~</span>
+                <select id="fCallTo" name="callTo" aria-label="통화가능시간 끝"></select>
+              </div>
+              <p class="field-hint">전화 상담을 원하시면 통화하기 편한 시간대를 골라주세요. (평일 10:00~22:00 / 토 10:00~17:00)</p>
+              <p class="err" data-for="fCallFrom"></p>
             </div>
 
             <div class="field">
