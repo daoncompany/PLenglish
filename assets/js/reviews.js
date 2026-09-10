@@ -1,5 +1,5 @@
 /* ============================================================
-   PL영어학원 — 수강후기 게시판
+   PL어학원 — 수강후기 게시판
    ------------------------------------------------------------
    [저장 방식]
    · endpoint 가 설정되어 있으면 → 구글시트(Apps Script)에 저장 = 모든 기기에서 공유
@@ -10,6 +10,18 @@
 window.PL_REVIEWS_API = {
   endpoint: 'https://script.google.com/macros/s/AKfycbweInbpb8Ze3d4rRzTFWYHhXY1EJPqJbb___uPTh2L3Aw1eu-B_tyZCLm2uO0OiuZ1h/exec',
 };
+
+/* ------------------------------------------------------------
+   [비공개 처리 후기]
+   개인정보(연락처 · 이메일)가 본문에 노출되어 목록에서 감춘 글 번호입니다.
+   · 여기 번호를 지우면 그 글은 다시 목록에 나옵니다.
+   · 원문은 구글시트 `후기` 탭과 `수강후기_시트업로드.csv` 에 그대로 남아 있습니다.
+     (reviews-data.js 백업본에서도 뺐으므로, 되살릴 때는 CSV/시트에서 다시 넣으세요)
+   · 88  「영어회화」(신수현, 2016-03-27)        — 본문에 이메일
+   · 105 「[re]회화 시간 등 문의」               — 문의 답글, 실명·연락처
+   · 106 「회화 시간 등 문의」(ksj, 2018-12-18)  — 문의 원글, 휴대폰·이메일
+   ------------------------------------------------------------ */
+window.PL_REVIEWS_HIDDEN = [88, 105, 106];
 
 (function () {
   'use strict';
@@ -63,9 +75,14 @@ window.PL_REVIEWS_API = {
   }
 
   /* ==================================================== 데이터 */
+  function visible(list) {
+    var hide = window.PL_REVIEWS_HIDDEN || [];
+    return list.filter(function (r) { return hide.indexOf(Number(r.no)) === -1; });
+  }
+
   function buildLocalData() {
     var base = (window.PL_REVIEWS || []).slice();
-    state.data = loadLocal().concat(base).sort(function (a, b) { return b.no - a.no; });
+    state.data = visible(loadLocal().concat(base)).sort(function (a, b) { return b.no - a.no; });
   }
 
   function refreshFromServer() {
@@ -74,7 +91,7 @@ window.PL_REVIEWS_API = {
     return api({ action: 'reviews.list' })
       .then(function (out) {
         if (!out || out.result !== 'ok' || !out.items) throw new Error('목록을 불러오지 못했습니다.');
-        state.data = out.items.map(function (r) {
+        state.data = visible(out.items).map(function (r) {
           return {
             no: Number(r.no), title: r.title, writer: r.writer, date: r.date,
             hit: Number(r.hit) || 0, content: r.content, editedAt: r.editedAt || '',
