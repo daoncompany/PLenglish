@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* ==========================================================================
-   PL영어학원 홈페이지 초안 — common style
+   PL어학원 홈페이지 초안 — common style
    Design ref : pagoda21.com  /  Brand point : RED + CHARCOAL
    ========================================================================== */
 
@@ -99,13 +99,12 @@ body {
 .gnb { flex: 1; display: flex; align-items: center; }
 .gnb > ul { display: flex; align-items: center; gap: 0; }
 .gnb > ul > li > a {
-  position: relative; display: block; padding: 0 14px; height: var(--hd-h);
+  position: relative; display: block; padding: 0 12px; height: var(--hd-h);
   line-height: var(--hd-h); font-size: 16px; font-weight: 600; color: var(--gray-800);
   white-space: nowrap; transition: color .2s ease;
 }
-.gnb > ul > li:nth-child(7) > a { color: var(--ink); }
 .gnb > ul > li > a::after {
-  content: ''; position: absolute; left: 14px; right: 14px; bottom: -1px;
+  content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px;
   height: 3px; background: var(--red); transform: scaleX(0); transform-origin: center;
   transition: transform .25s ease;
 }
@@ -113,6 +112,30 @@ body {
 .gnb > ul > li > a:hover::after,
 .gnb > ul > li > a.on::after { transform: scaleX(1); }
 .gnb > ul > li > a.on { color: var(--red); font-weight: 700; }
+/* 소메뉴 (대메뉴 > 하위) */
+.gnb > ul > li.has-sub { position: relative; }
+.gnb > ul > li > a.has-sub-mark { padding-right: 22px; }
+.gnb .sub {
+  position: absolute; left: 50%; top: 100%; transform: translateX(-50%) translateY(6px);
+  min-width: 152px; padding: 8px; background: #fff; border: 1px solid var(--line);
+  border-radius: 12px; box-shadow: 0 14px 30px rgba(22, 24, 28, .12);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+}
+.gnb > ul > li.has-sub:hover .sub,
+.gnb > ul > li.has-sub:focus-within .sub {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity .2s ease, transform .2s ease, visibility 0s;
+}
+.gnb .sub a {
+  display: block; padding: 10px 12px; border-radius: 8px;
+  font-size: 15px; font-weight: 600; color: var(--gray-800); white-space: nowrap;
+  transition: background .18s ease, color .18s ease;
+}
+.gnb .sub a:hover { background: var(--red-soft); color: var(--red-dark); }
+.gnb .sub a.on { color: var(--red); font-weight: 700; }
+
 .gnb-cta { display: none; }
 
 .hd-util { display: flex; align-items: center; gap: 16px; flex: none; }
@@ -148,6 +171,9 @@ body {
 .page-opic           { --hero-img: url('../img/index_img1.png'); }  /* 오픽 */
 .page-ielts          { --hero-img: url('../img/index_img1.png'); }  /* 아이엘츠 */
 .page-toefl          { --hero-img: url('../img/index_img1.png'); }  /* 토플 */
+.page-duolingo       { --hero-img: url('../img/index_img1.png'); }  /* 듀오링고 */
+.page-workingholiday { --hero-img: url('../img/index_img1.png'); }  /* 워홀대비반 */
+.page-interview      { --hero-img: url('../img/index_img1.png'); }  /* 영어인터뷰 */
 .page-reviews        { --hero-img: url('../img/index_img1.png'); }  /* 수강후기 */
 .page-contact        { --hero-img: url('../img/index_img1.png'); }  /* 문의하기 */
 
@@ -318,10 +344,21 @@ body {
   background: var(--bg-soft); border: 1px solid var(--line);
 }
 .about-info h3 { font-size: 22px; font-weight: 800; letter-spacing: -.04em; margin-bottom: 22px; }
-.about-info dl > div { display: flex; gap: 14px; padding: 15px 0; border-top: 1px solid var(--line); }
-.about-info dl > div:first-of-type { border-top: 0; padding-top: 0; }
-.about-info dt { flex: none; width: 108px; font-size: 15px; font-weight: 700; color: var(--red); }
-.about-info dd { font-size: 15px; color: var(--gray-800); line-height: 1.6; }
+.about-info dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.about-info dl > div {
+  padding: 18px 16px; border-radius: 14px; background: #fff; border: 1px solid var(--line);
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.about-info dl > div:hover { border-color: #ffd7d3; box-shadow: 0 8px 20px rgba(22, 24, 28, .06); }
+.about-info dt {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13.5px; font-weight: 700; color: var(--red); letter-spacing: -.03em;
+}
+.about-info dt svg {
+  width: 17px; height: 17px; flex: none;
+  fill: none; stroke: var(--red); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;
+}
+.about-info dd { margin-top: 8px; font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.55; letter-spacing: -.03em; }
 .about-note { margin-top: 22px; font-size: 13px; color: var(--gray-400); }
 
 /* ---------------------------------------------------------------- why */
@@ -338,22 +375,35 @@ body {
   width: 46px; height: 46px; margin-bottom: 22px; border-radius: 14px;
   background: var(--red-soft); color: var(--red); font-size: 16px; font-weight: 800;
 }
+.wc-ico {
+  position: absolute; right: 26px; top: 34px;
+  width: 58px; height: 58px; opacity: .16; transition: opacity .3s ease, transform .3s ease;
+}
+.wc-ico svg { width: 100%; height: 100%; fill: none; stroke: var(--red); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.why-card:hover .wc-ico { opacity: .32; transform: scale(1.06); }
 .why-card h3 { font-size: 20px; font-weight: 800; line-height: 1.45; letter-spacing: -.04em; }
 .why-card p { margin-top: 14px; font-size: 15.5px; color: var(--gray-600); line-height: 1.75; }
 
 /* ---------------------------------------------------------------- benefit */
 .sec-benefit { background: #fff; }
-.benefit-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 48px; }
+.benefit-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .benefit-list li {
-  display: flex; gap: 18px; padding: 26px 0; border-bottom: 1px solid var(--line);
+  display: block; padding: 34px 28px 30px; border-radius: var(--radius);
+  background: var(--bg-soft); border: 1px solid transparent;
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease;
+}
+.benefit-list li:hover {
+  transform: translateY(-6px); background: #fff;
+  border-color: var(--line); box-shadow: var(--shadow-lg);
 }
 .bf-ico {
-  flex: none; display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 50%; background: var(--red); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; margin-bottom: 20px; border-radius: 18px;
+  background: var(--red); color: #fff; box-shadow: 0 10px 20px rgba(232, 41, 28, .22);
 }
-.bf-ico svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.benefit-list h3 { font-size: 19px; font-weight: 700; letter-spacing: -.04em; }
-.benefit-list p { margin-top: 8px; font-size: 15.5px; color: var(--gray-600); line-height: 1.7; }
+.bf-ico svg { width: 27px; height: 27px; fill: none; stroke: #fff; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.benefit-list h3 { font-size: 19px; font-weight: 800; line-height: 1.45; letter-spacing: -.04em; }
+.benefit-list p { margin-top: 10px; font-size: 15.5px; color: var(--gray-600); line-height: 1.75; }
 
 .target {
   margin-top: 60px; padding: 46px 50px; border-radius: var(--radius);
@@ -361,11 +411,16 @@ body {
   display: grid; grid-template-columns: 1fr auto; gap: 20px 40px; align-items: center;
 }
 .target h3 { grid-column: 1 / -1; font-size: 24px; font-weight: 800; letter-spacing: -.04em; }
-.target ul { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 32px; }
-.target li { position: relative; padding-left: 26px; font-size: 16.5px; font-weight: 500; color: var(--gray-800); }
+.target ul { display: flex; flex-wrap: wrap; gap: 10px; }
+.target li {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 12px 18px 12px 14px; border-radius: 100px;
+  background: #fff; border: 1px solid #ffd0cb;
+  font-size: 15.5px; font-weight: 600; color: var(--ink); letter-spacing: -.03em;
+}
 .target li::before {
-  content: ''; position: absolute; left: 0; top: 9px; width: 14px; height: 14px;
-  border-radius: 50%; background: var(--red); box-shadow: inset 0 0 0 4px #fff;
+  content: ''; flex: none; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") no-repeat center / 11px 11px;
 }
 
 /* ---------------------------------------------------------------- strength */
@@ -416,22 +471,20 @@ body {
   border-top: 2px solid var(--gray-400); border-right: 2px solid var(--gray-400);
   transform: translateY(-50%) rotate(45deg);
 }
+.pr-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; margin-bottom: 18px; border-radius: 50%;
+  background: #fff; border: 1px solid var(--line);
+  transition: transform .3s ease, border-color .3s ease;
+}
+.pr-ico svg { width: 28px; height: 28px; fill: none; stroke: var(--red); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.process li:hover .pr-ico { transform: translateY(-4px); border-color: #ffd7d3; }
 .pr-no { display: block; font-size: 13px; font-weight: 800; letter-spacing: .1em; color: var(--red); }
 .process h3 { margin-top: 12px; font-size: 20px; font-weight: 700; letter-spacing: -.04em; }
 .process p { margin-top: 10px; font-size: 15px; color: var(--gray-600); line-height: 1.7; }
 
 /* ---------------------------------------------------------------- timetable */
 .sec-time { background: var(--bg-soft); }
-.tt-tab { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 28px; }
-.tt-tab button {
-  height: 46px; padding: 0 24px; border-radius: 100px;
-  background: #fff; border: 1px solid var(--line);
-  font-size: 15.5px; font-weight: 600; color: var(--gray-600);
-  transition: all .2s ease;
-}
-.tt-tab button:hover { border-color: var(--red); color: var(--red); }
-.tt-tab button.on { background: var(--ink); border-color: var(--ink); color: #fff; font-weight: 700; }
-
 .tt-wrap { overflow-x: auto; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); }
 .tt { min-width: 860px; }
 .tt th, .tt td { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
@@ -453,6 +506,10 @@ body {
 }
 .tt-empty { color: #d3d7dd; font-size: 15px; }
 
+.tt-plan { min-width: 640px; }
+.tt-plan td { text-align: left; padding: 18px 20px; font-size: 15px; color: var(--gray-600); }
+.tt-plan td .tt-item { margin: 3px 6px 3px 0; }
+
 .tt-note { margin-top: 26px; }
 .tt-note li { position: relative; padding-left: 16px; margin-top: 8px; font-size: 14.5px; color: var(--gray-600); line-height: 1.7; }
 .tt-note li::before { content: ''; position: absolute; left: 0; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400); }
@@ -468,8 +525,17 @@ body {
   transition: transform .3s ease, box-shadow .3s ease, background-color .3s ease;
 }
 .course-card:hover { transform: translateY(-8px); background: #fff; border-color: var(--line); box-shadow: var(--shadow-lg); }
+.cc-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 58px; height: 58px; margin-bottom: 20px; border-radius: 18px;
+  background: #fff; border: 1px solid var(--line);
+  transition: background .3s ease, border-color .3s ease, transform .3s ease;
+}
+.cc-ico svg { width: 28px; height: 28px; fill: none; stroke: var(--red); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.course-card:hover .cc-ico { background: var(--red); border-color: var(--red); transform: translateY(-2px); }
+.course-card:hover .cc-ico svg { stroke: #fff; }
 .cc-eng { font-size: 13px; font-weight: 800; letter-spacing: .1em; color: var(--red); }
-.course-card h3 { margin-top: 10px; font-size: 30px; font-weight: 800; letter-spacing: -.045em; }
+.course-card h3 { margin-top: 8px; font-size: 28px; font-weight: 800; letter-spacing: -.045em; }
 .course-card p { margin-top: 12px; font-size: 16.5px; color: var(--gray-600); }
 .cc-more {
   display: inline-flex; align-items: center; gap: 6px; margin-top: 28px;
@@ -780,6 +846,16 @@ body {
     font-size: clamp(16px, 2.1vh, 18px); border-bottom: 1px solid var(--line);
   }
   .gnb > ul > li > a::after { display: none; }
+  .gnb .sub {
+    position: static; transform: none; opacity: 1; visibility: visible; pointer-events: auto;
+    min-width: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent;
+  }
+  .gnb .sub a {
+    padding: clamp(9px, 1.5vh, 14px) 4px clamp(9px, 1.5vh, 14px) 18px;
+    border-bottom: 1px solid var(--line); border-radius: 0;
+    font-size: clamp(14.5px, 1.9vh, 16px); color: var(--gray-600);
+  }
+  .gnb .sub a::before { content: '- '; color: var(--gray-400); }
   .gnb-cta { display: flex; flex: none; margin-top: 18px; height: 50px; }
   .hd-util .btn-sm { display: none; }
 
@@ -835,6 +911,7 @@ body {
 
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .benefit-list { grid-template-columns: repeat(2, 1fr); }
   .strength-grid { grid-template-columns: 1fr; }
   .st-card { padding: 36px 28px; }
   .process { grid-template-columns: repeat(2, 1fr); }
@@ -876,19 +953,19 @@ body {
   .about-lead { font-size: 18px; }
   .about-txt { font-size: 15.5px; }
   .about-info { padding: 28px 22px; }
-  .about-info dl > div { flex-direction: column; gap: 4px; }
-  .about-info dt { width: auto; }
+  .about-info dl { grid-template-columns: 1fr; }
 
   .why-grid { grid-template-columns: 1fr; gap: 16px; }
   .why-card { padding: 30px 24px; }
   .why-card h3 { font-size: 18.5px; }
 
-  .benefit-list { grid-template-columns: 1fr; gap: 0; }
-  .benefit-list li { padding: 22px 0; gap: 14px; }
+  .benefit-list { grid-template-columns: 1fr; gap: 14px; }
+  .benefit-list li { padding: 26px 22px; }
+  .bf-ico { width: 48px; height: 48px; margin-bottom: 14px; border-radius: 15px; }
+  .bf-ico svg { width: 23px; height: 23px; }
   .benefit-list h3 { font-size: 17.5px; }
   .target { grid-template-columns: 1fr; padding: 32px 24px; }
   .target h3 { font-size: 21px; }
-  .target ul { grid-template-columns: 1fr; }
   .target li { font-size: 15.5px; }
   .target .btn { width: 100%; }
 
@@ -900,7 +977,6 @@ body {
   .process li::after { display: none !important; }
   .process li { padding: 26px 22px; }
 
-  .tt-tab button { height: 42px; padding: 0 18px; font-size: 14.5px; }
   .tt-cta .btn { width: 100%; }
 
   .course-grid { grid-template-columns: 1fr; }

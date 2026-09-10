@@ -1,4 +1,4 @@
-/* PL영어학원 홈페이지 초안 — common script */
+/* PL어학원 홈페이지 초안 — common script */
 (function () {
   'use strict';
 
@@ -36,17 +36,6 @@
   if (qtop) {
     qtop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  /* 시간표 탭 (초안용 UI 동작) */
-  var ttTab = document.querySelector('.tt-tab');
-  if (ttTab) {
-    ttTab.addEventListener('click', function (e) {
-      var btn = e.target.closest('button');
-      if (!btn) return;
-      ttTab.querySelectorAll('button').forEach(function (b) { b.classList.remove('on'); });
-      btn.classList.add('on');
     });
   }
 
