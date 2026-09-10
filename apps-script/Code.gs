@@ -28,7 +28,7 @@ var HIDDEN_NOS   = [88, 105, 106];
 
 // 배포 확인용 표시 — 코드를 고쳐 새로 배포할 때마다 날짜를 바꿔두면
 // 웹앱 주소를 브라우저로 열었을 때 어느 버전이 돌고 있는지 바로 알 수 있습니다.
-var CODE_VERSION = '2026-09-10b';
+var CODE_VERSION = '2026-09-10c';
 /* ▲▲▲ ------------------------------------ ▲▲▲ */
 
 
@@ -76,7 +76,7 @@ function inquiry_(data) {
   var phone   = clean_(data.phone);
   var callTime = clean_(data.callTime);
   var message = clean_(data.message);
-  if (!name || !email || !message) return { result: 'error', message: '필수 항목이 비어 있습니다.' };
+  if (!name || !email || !message || !phone || !callTime) return { result: 'error', message: '필수 항목이 비어 있습니다.' };
 
   // 통화가능시간은 기존 데이터와 어긋나지 않도록 맨 끝 칸에 넣습니다.
   getInquirySheet_().appendRow([new Date(), name, email, phone || '(미기재)', message, data.page || '', callTime || '(미선택)']);

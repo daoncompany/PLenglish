@@ -7,11 +7,11 @@
 <meta name="description" content="이름 · 이메일 · 연락처와 수강문의 내용을 남겨주시면 담당자가 메일 확인 후 빠르게 회신드립니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=20260910">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body class="page-contact">
-<script src="assets/js/layout.js"></script>
+<script src="assets/js/layout.js?v=20260910"></script>
 
 <main>
 <section class="hero hero-sm2">
@@ -57,19 +57,19 @@
             </div>
 
             <div class="field">
-              <label for="fPhone">C.P <span>(핸드폰)</span></label>
-              <input type="tel" id="fPhone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric">
+              <label for="fPhone">C.P <span>(핸드폰)</span> <em class="req">*</em></label>
+              <input type="tel" id="fPhone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric" required>
               <p class="err" data-for="fPhone"></p>
             </div>
 
             <div class="field">
-              <label for="fCallFrom">Call time <span>(통화가능시간)</span></label>
+              <label for="fCallFrom">Call time <span>(통화가능시간)</span> <em class="req">*</em></label>
               <div class="time-range">
                 <select id="fCallFrom" name="callFrom" aria-label="통화가능시간 시작"></select>
                 <span class="time-sep" aria-hidden="true">~</span>
                 <select id="fCallTo" name="callTo" aria-label="통화가능시간 끝"></select>
               </div>
-              <p class="field-hint">전화 상담을 원하시면 통화하기 편한 시간대를 골라주세요. (평일 10:00~22:00 / 토 10:00~17:00)</p>
+              <p class="field-hint">통화하기 편한 시간대를 골라주세요. 시간대가 정해져 있지 않다면 <b>언제든 가능</b>을 선택하시면 됩니다. (평일 10:00~22:00 / 토 10:00~17:00)</p>
               <p class="err" data-for="fCallFrom"></p>
             </div>
 
@@ -79,7 +79,7 @@
               <p class="err" data-for="fMessage"></p>
             </div>
 
-            <p class="form-notice"><strong>빠른 상담을 원하시는 경우에는 전화번호를 꼭 남겨주세요.</strong></p>
+            <p class="form-notice"><strong>전화번호와 통화가능시간을 남겨주시면 가장 빠르게 상담받으실 수 있습니다.</strong></p>
 
             <label class="agree" for="fAgree">
               <input type="checkbox" id="fAgree" required>
@@ -127,7 +127,7 @@
 </main>
 
 <script>PL.footer();</script>
-<script src="assets/js/common.js"></script>
-<script src="assets/js/contact.js"></script>
+<script src="assets/js/common.js?v=20260910"></script>
+<script src="assets/js/contact.js?v=20260910"></script>
 </body>
 </html>
