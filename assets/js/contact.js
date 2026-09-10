@@ -57,6 +57,7 @@ window.PL_CONTACT = {
       name: $('fName').value.trim(),
       email: $('fEmail').value.trim(),
       phone: $('fPhone').value.trim(),
+      callTime: $('fCallTime') ? $('fCallTime').value : '',
       message: $('fMessage').value.trim(),
       website: $('fWebsite') ? $('fWebsite').value : '',   // 스팸봇용 함정 필드
       page: location.href,
@@ -86,6 +87,7 @@ window.PL_CONTACT = {
       '■ Name (이름) : ' + d.name,
       '■ E-mail (이메일) : ' + d.email,
       '■ C.P (핸드폰) : ' + (d.phone || '(미기재)'),
+      '■ Call time (통화가능시간) : ' + (d.callTime || '(미선택)'),
       '',
       '■ Counsel about classes (수강문의)',
       d.message,
