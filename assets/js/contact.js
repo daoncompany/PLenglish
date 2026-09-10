@@ -26,6 +26,55 @@ window.PL_CONTACT = {
   var $ = function (id) { return document.getElementById(id); };
   var cfg = function () { return window.PL_CONTACT || {}; };
 
+  /* ---------------------------------------------- 통화가능시간 (30분 단위) */
+  var CALL_OPEN = 10, CALL_CLOSE = 22;      // 운영시간 (평일 10:00 ~ 22:00)
+
+  function timeSlots() {
+    var out = [];
+    for (var h = CALL_OPEN; h <= CALL_CLOSE; h++) {
+      out.push((h < 10 ? '0' : '') + h + ':00');
+      if (h !== CALL_CLOSE) out.push((h < 10 ? '0' : '') + h + ':30');
+    }
+    return out;
+  }
+
+  var syncCallTime = function () {};
+
+  function buildTimeSelects() {
+    var from = $('fCallFrom'), to = $('fCallTo');
+    if (!from || !to) return;
+    var slots = timeSlots();
+
+    from.innerHTML = '<option value="">선택 안 함</option><option value="언제든 가능">언제든 가능</option>' +
+      slots.map(function (t) { return '<option value="' + t + '">' + t + '</option>'; }).join('');
+    to.innerHTML = '<option value="">끝 시간</option>' +
+      slots.map(function (t) { return '<option value="' + t + '">' + t + '</option>'; }).join('');
+
+    function sync() {
+      var anytime = from.value === '언제든 가능';
+      to.disabled = anytime || !from.value;
+      if (to.disabled) to.value = '';
+      /* 시작보다 이른 끝 시간은 고를 수 없게 */
+      var fi = slots.indexOf(from.value);
+      Array.prototype.forEach.call(to.options, function (o) {
+        o.hidden = !!o.value && fi > -1 && slots.indexOf(o.value) <= fi;
+      });
+      if (to.value && slots.indexOf(to.value) <= fi) to.value = '';
+    }
+    syncCallTime = sync;
+    from.addEventListener('change', function () { sync(); setError('fCallFrom', ''); });
+    to.addEventListener('change', function () { setError('fCallFrom', ''); });
+    sync();
+  }
+  buildTimeSelects();
+
+  function callTimeValue() {
+    var from = $('fCallFrom'), to = $('fCallTo');
+    if (!from || !from.value) return '';
+    if (from.value === '언제든 가능') return '언제든 가능';
+    return to && to.value ? from.value + ' ~ ' + to.value : from.value + ' 이후';
+  }
+
   /* ---------------------------------------------- 검증 */
   function setError(inputId, msg) {
     var input = $(inputId);
@@ -47,6 +96,10 @@ window.PL_CONTACT = {
     ok = setError('fEmail', !email ? '이메일을 입력해 주세요.'
       : (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : '이메일 형식을 확인해 주세요.')) && ok;
     ok = setError('fPhone', (!phone || /^[0-9+\-\s()]{9,20}$/.test(phone)) ? '' : '연락처 형식을 확인해 주세요.') && ok;
+    var cf = $('fCallFrom'), ct = $('fCallTo');
+    var badRange = cf && ct && cf.value && cf.value !== '언제든 가능' && ct.value &&
+                   timeSlots().indexOf(ct.value) <= timeSlots().indexOf(cf.value);
+    ok = setError('fCallFrom', badRange ? '끝 시간을 시작 시간보다 뒤로 골라주세요.' : '') && ok;
     ok = setError('fMessage', msg ? '' : '문의 내용을 입력해 주세요.') && ok;
     ok = setError('fAgree', $('fAgree').checked ? '' : '개인정보 수집 및 이용에 동의해 주세요.') && ok;
     return ok;
@@ -57,7 +110,7 @@ window.PL_CONTACT = {
       name: $('fName').value.trim(),
       email: $('fEmail').value.trim(),
       phone: $('fPhone').value.trim(),
-      callTime: $('fCallTime') ? $('fCallTime').value : '',
+      callTime: callTimeValue(),
       message: $('fMessage').value.trim(),
       website: $('fWebsite') ? $('fWebsite').value : '',   // 스팸봇용 함정 필드
       page: location.href,
@@ -153,7 +206,8 @@ window.PL_CONTACT = {
     sendByScript(d)
       .then(function () {
         form.reset();
-        ['fName', 'fEmail', 'fPhone', 'fMessage', 'fAgree'].forEach(function (id) { setError(id, ''); });
+        syncCallTime();
+        ['fName', 'fEmail', 'fPhone', 'fCallFrom', 'fMessage', 'fAgree'].forEach(function (id) { setError(id, ''); });
         showResult('ok', successHtml(d));
       })
       .catch(function (err) {
@@ -163,7 +217,8 @@ window.PL_CONTACT = {
   });
 
   form.addEventListener('reset', function () {
-    ['fName', 'fEmail', 'fPhone', 'fMessage', 'fAgree'].forEach(function (id) { setError(id, ''); });
+    setTimeout(syncCallTime, 0);
+    ['fName', 'fEmail', 'fPhone', 'fCallFrom', 'fMessage', 'fAgree'].forEach(function (id) { setError(id, ''); });
     hideResult();
   });
 
