@@ -18,6 +18,13 @@ var SHEET_NAME   = '문의접수';                // 문의가 쌓일 시트 탭
 var REVIEW_SHEET = '후기';                    // 후기가 쌓일 시트 탭 이름 (이름이 달라도 '후기'가 들어가면 자동 인식)
 var PW_SALT      = 'pl-review-2026';          // 비밀번호 암호화용 값 (한 번 정하면 바꾸지 마세요)
 var IMPORT_KEY   = 'pl-import-2026';          // 기존 후기 일괄 등록용 열쇠
+
+// 목록에서 감출 후기 번호 (본문에 개인정보가 노출된 글)
+//   88  「영어회화」(신수현, 2016-03-27)        — 이메일
+//   105 「[re]회화 시간 등 문의」               — 문의 답글, 실명 · 연락처
+//   106 「회화 시간 등 문의」(ksj, 2018-12-18)  — 휴대폰 · 이메일
+// 여기서 번호를 빼면 그 글이 다시 목록에 나옵니다. 시트 원본은 그대로 남습니다.
+var HIDDEN_NOS   = [88, 105, 106];
 /* ▲▲▲ ------------------------------------ ▲▲▲ */
 
 
@@ -189,10 +196,12 @@ function readReviews_() {
   return { sheet: sheet, rows: rows, cols: cols };
 }
 
-/** 목록 — 비밀번호는 절대 내보내지 않습니다 */
+/** 목록 — 비밀번호와 비공개 처리된 글은 절대 내보내지 않습니다 */
 function reviewsList_() {
   var db = readReviews_();
-  var items = db.rows.map(function (r) {
+  var items = db.rows.filter(function (r) {
+    return HIDDEN_NOS.indexOf(Number(r.no)) === -1;
+  }).map(function (r) {
     return {
       no: r.no, title: r.title, writer: r.writer, date: r.date,
       hit: r.hit, content: r.content, editedAt: r.editedAt,
