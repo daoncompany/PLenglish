@@ -25,6 +25,10 @@ var IMPORT_KEY   = 'pl-import-2026';          // 기존 후기 일괄 등록용 
 //   106 「회화 시간 등 문의」(ksj, 2018-12-18)  — 휴대폰 · 이메일
 // 여기서 번호를 빼면 그 글이 다시 목록에 나옵니다. 시트 원본은 그대로 남습니다.
 var HIDDEN_NOS   = [88, 105, 106];
+
+// 배포 확인용 표시 — 코드를 고쳐 새로 배포할 때마다 날짜를 바꿔두면
+// 웹앱 주소를 브라우저로 열었을 때 어느 버전이 돌고 있는지 바로 알 수 있습니다.
+var CODE_VERSION = '2026-09-10';
 /* ▲▲▲ ------------------------------------ ▲▲▲ */
 
 
@@ -53,6 +57,9 @@ function doGet(e) {
   return jsonOut({
     result: 'ok',
     message: 'PL어학원 API 정상 동작 중',
+    version: CODE_VERSION,
+    mailTo: MAIL_TO,
+    hiddenReviews: HIDDEN_NOS,
     sheets: SpreadsheetApp.getActiveSpreadsheet().getSheets().map(function (s) { return s.getName(); }),
   });
 }
