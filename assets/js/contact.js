@@ -45,7 +45,7 @@ window.PL_CONTACT = {
     if (!from || !to) return;
     var slots = timeSlots();
 
-    from.innerHTML = '<option value="">선택 안 함</option><option value="언제든 가능">언제든 가능</option>' +
+    from.innerHTML = '<option value="">시작 시간</option><option value="언제든 가능">언제든 가능</option>' +
       slots.map(function (t) { return '<option value="' + t + '">' + t + '</option>'; }).join('');
     to.innerHTML = '<option value="">끝 시간</option>' +
       slots.map(function (t) { return '<option value="' + t + '">' + t + '</option>'; }).join('');
@@ -95,11 +95,19 @@ window.PL_CONTACT = {
     ok = setError('fName', name ? '' : '이름을 입력해 주세요.') && ok;
     ok = setError('fEmail', !email ? '이메일을 입력해 주세요.'
       : (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : '이메일 형식을 확인해 주세요.')) && ok;
-    ok = setError('fPhone', (!phone || /^[0-9+\-\s()]{9,20}$/.test(phone)) ? '' : '연락처 형식을 확인해 주세요.') && ok;
+    ok = setError('fPhone', !phone ? '연락처를 입력해 주세요.'
+      : (/^[0-9+\-\s()]{9,20}$/.test(phone) ? '' : '연락처 형식을 확인해 주세요.')) && ok;
     var cf = $('fCallFrom'), ct = $('fCallTo');
-    var badRange = cf && ct && cf.value && cf.value !== '언제든 가능' && ct.value &&
-                   timeSlots().indexOf(ct.value) <= timeSlots().indexOf(cf.value);
-    ok = setError('fCallFrom', badRange ? '끝 시간을 시작 시간보다 뒤로 골라주세요.' : '') && ok;
+    var callMsg = '';
+    if (cf && ct) {
+      if (!cf.value) {
+        callMsg = '통화 가능한 시간을 골라주세요.';
+      } else if (cf.value !== '언제든 가능') {
+        if (!ct.value) callMsg = '끝 시간도 골라주세요. (시간대가 정해져 있지 않다면 「언제든 가능」)';
+        else if (timeSlots().indexOf(ct.value) <= timeSlots().indexOf(cf.value)) callMsg = '끝 시간을 시작 시간보다 뒤로 골라주세요.';
+      }
+    }
+    ok = setError('fCallFrom', callMsg) && ok;
     ok = setError('fMessage', msg ? '' : '문의 내용을 입력해 주세요.') && ok;
     ok = setError('fAgree', $('fAgree').checked ? '' : '개인정보 수집 및 이용에 동의해 주세요.') && ok;
     return ok;
