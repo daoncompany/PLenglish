@@ -67,10 +67,12 @@ function inquiry_(data) {
   var name    = clean_(data.name);
   var email   = clean_(data.email);
   var phone   = clean_(data.phone);
+  var callTime = clean_(data.callTime);
   var message = clean_(data.message);
   if (!name || !email || !message) return { result: 'error', message: '필수 항목이 비어 있습니다.' };
 
-  getInquirySheet_().appendRow([new Date(), name, email, phone || '(미기재)', message, data.page || '']);
+  // 통화가능시간은 기존 데이터와 어긋나지 않도록 맨 끝 칸에 넣습니다.
+  getInquirySheet_().appendRow([new Date(), name, email, phone || '(미기재)', message, data.page || '', callTime || '(미선택)']);
 
   MailApp.sendEmail({
     to: MAIL_TO,
@@ -81,7 +83,8 @@ function inquiry_(data) {
       '홈페이지 온라인 문의가 접수되었습니다.\n\n' +
       '■ Name (이름)      : ' + name + '\n' +
       '■ E-mail (이메일)   : ' + email + '\n' +
-      '■ C.P (핸드폰)      : ' + (phone || '(미기재)') + '\n\n' +
+      '■ C.P (핸드폰)      : ' + (phone || '(미기재)') + '\n' +
+      '■ Call time (통화가능시간) : ' + (callTime || '(미선택)') + '\n\n' +
       '■ Counsel about classes (수강문의)\n' + message + '\n\n' +
       '--------------------------------------\n' +
       '접수일시 : ' + now_() + '\n' +
@@ -97,7 +100,7 @@ function getInquirySheet_() {
   var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(['접수일시', '이름', '이메일', '연락처', '수강문의 내용', '유입 페이지']);
+    sheet.appendRow(['접수일시', '이름', '이메일', '연락처', '수강문의 내용', '유입 페이지', '통화가능시간']);
     sheet.getRange(1, 1, 1, 6).setFontWeight('bold').setBackground('#f5f6f8');
     sheet.setColumnWidths(1, 6, 150);
     sheet.setColumnWidth(5, 480);
