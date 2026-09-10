@@ -12,7 +12,7 @@
  */
 
 /* ▼▼▼ 학원 정보에 맞게 수정 ▼▼▼ */
-var MAIL_TO      = 'plinstitute@gmail.com';  // 문의를 받을 메일 주소 (여러 명이면 콤마로 구분)
+var MAIL_TO      = 'daoncompany4512@gmail.com';  // 문의를 받을 메일 주소 (여러 명이면 콤마로 구분)
 var MAIL_FROM    = 'PL어학원 홈페이지';      // 메일에 표시될 보내는 사람 이름
 var SHEET_NAME   = '문의접수';                // 문의가 쌓일 시트 탭 이름
 var REVIEW_SHEET = '후기';                    // 후기가 쌓일 시트 탭 이름 (이름이 달라도 '후기'가 들어가면 자동 인식)
