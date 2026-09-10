@@ -28,7 +28,7 @@ var HIDDEN_NOS   = [88, 105, 106];
 
 // 배포 확인용 표시 — 코드를 고쳐 새로 배포할 때마다 날짜를 바꿔두면
 // 웹앱 주소를 브라우저로 열었을 때 어느 버전이 돌고 있는지 바로 알 수 있습니다.
-var CODE_VERSION = '2026-09-10';
+var CODE_VERSION = '2026-09-10b';
 /* ▲▲▲ ------------------------------------ ▲▲▲ */
 
 
@@ -81,12 +81,10 @@ function inquiry_(data) {
   // 통화가능시간은 기존 데이터와 어긋나지 않도록 맨 끝 칸에 넣습니다.
   getInquirySheet_().appendRow([new Date(), name, email, phone || '(미기재)', message, data.page || '', callTime || '(미선택)']);
 
-  MailApp.sendEmail({
-    to: MAIL_TO,
-    subject: '[홈페이지 문의] ' + name + '님' + (phone ? ' / ' + phone : ''),
-    name: MAIL_FROM,
-    replyTo: email,
-    body:
+  /* GmailApp 을 쓰면 [답장] 이 문의하신 분에게 연결됩니다.
+     (MailApp 은 환경에 따라 Reply-To 가 무시되어 보낸 계정으로 답장이 갑니다) */
+  var subject_ = '[홈페이지 문의] ' + name + '님' + (phone ? ' / ' + phone : '');
+  var body_ =
       '홈페이지 온라인 문의가 접수되었습니다.\n\n' +
       '■ Name (이름)      : ' + name + '\n' +
       '■ E-mail (이메일)   : ' + email + '\n' +
@@ -96,8 +94,13 @@ function inquiry_(data) {
       '--------------------------------------\n' +
       '접수일시 : ' + now_() + '\n' +
       '접수경로 : ' + (data.page || '홈페이지 문의 폼') + '\n' +
-      '\n※ 이 메일에 그대로 [답장]하면 문의하신 분에게 회신됩니다.',
-  });
+      '\n※ 이 메일에 그대로 [답장]하면 문의하신 분(' + email + ')에게 회신됩니다.';
+  var opts_ = { name: MAIL_FROM, replyTo: email };
+  try {
+    GmailApp.sendEmail(MAIL_TO, subject_, body_, opts_);
+  } catch (e) {
+    MailApp.sendEmail({ to: MAIL_TO, subject: subject_, body: body_, name: MAIL_FROM, replyTo: email });
+  }
 
   return { result: 'ok' };
 }
@@ -361,12 +364,16 @@ function 메일설정_확인() {
 
 /** 메일 발송만 단독 테스트 — 실행하면 MAIL_TO 로 한 통 보냅니다 */
 function 메일_한통_보내기() {
-  MailApp.sendEmail({
-    to: MAIL_TO,
-    subject: '[PL어학원] 메일 발송 테스트 (' + CODE_VERSION + ')',
-    name: MAIL_FROM,
-    body: '이 메일이 도착하면 발송 기능은 정상입니다.\n받는 주소 : ' + MAIL_TO + '\n보낸 계정 : ' + Session.getEffectiveUser().getEmail(),
-  });
+  var TEST_REPLY_TO = 'test-reply@example.com';   // 답장 확인용 가짜 주소
+  GmailApp.sendEmail(
+    MAIL_TO,
+    '[PL어학원] 메일 발송 테스트 (' + CODE_VERSION + ')',
+    '이 메일이 도착하면 발송 기능은 정상입니다.\n받는 주소 : ' + MAIL_TO +
+    '\n보낸 계정 : ' + Session.getEffectiveUser().getEmail() +
+    '\n\n[답장]을 눌렀을 때 받는 사람이 ' + TEST_REPLY_TO + ' 로 뜨면 회신 설정이 정상입니다.' +
+    '\n(없는 주소이니 실제로 보내지는 마세요)',
+    { name: MAIL_FROM, replyTo: TEST_REPLY_TO }
+  );
   Logger.log(MAIL_TO + ' 로 보냈습니다. 남은 발송량 ' + MailApp.getRemainingDailyQuota() + '통');
 }
 
