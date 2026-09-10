@@ -11,7 +11,7 @@
    ============================================================ */
 window.PL_CONTACT = {
   endpoint: 'https://script.google.com/macros/s/AKfycbweInbpb8Ze3d4rRzTFWYHhXY1EJPqJbb___uPTh2L3Aw1eu-B_tyZCLm2uO0OiuZ1h/exec',
-  mailTo: 'plinstitute@gmail.com',
+  mailTo: 'daoncompany4512@gmail.com',
   tel: '032-544-3352',
 };
 
