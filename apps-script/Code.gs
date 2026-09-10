@@ -338,6 +338,40 @@ function 테스트발송() {
   Logger.log(r);
 }
 
+/**
+ * 메일이 안 올 때 여기부터 확인하세요.
+ * 편집기 위쪽 함수 목록에서 [메일설정_확인] 을 고르고 [실행] → [실행 로그] 를 보면 됩니다.
+ */
+function 메일설정_확인() {
+  var sh = getInquirySheet_();
+  var last = sh.getLastRow();
+  Logger.log('■ 코드 버전        : ' + CODE_VERSION);
+  Logger.log('■ 받는 주소(MAIL_TO): ' + MAIL_TO);
+  Logger.log('■ 보내는 계정       : ' + Session.getEffectiveUser().getEmail());
+  Logger.log('■ 오늘 남은 발송량  : ' + MailApp.getRemainingDailyQuota() + '통');
+  Logger.log('■ 문의접수 시트 행수: ' + last);
+  if (last > 1) {
+    Logger.log('■ 마지막 행         : ' + JSON.stringify(sh.getRange(last, 1, 1, sh.getLastColumn()).getValues()[0]));
+  }
+  Logger.log('----------------------------------------');
+  Logger.log('받는 주소가 예전 것이면 → 코드를 붙여넣고 [배포 관리 → 편집 → 새 버전 → 배포]');
+  Logger.log('남은 발송량이 0이면    → 오늘 한도를 다 쓴 것이니 내일 다시 시도');
+  Logger.log('마지막 행 맨 끝에 시간이 없으면 → 옛 코드가 배포되어 있는 상태');
+}
+
+/** 메일 발송만 단독 테스트 — 실행하면 MAIL_TO 로 한 통 보냅니다 */
+function 메일_한통_보내기() {
+  MailApp.sendEmail({
+    to: MAIL_TO,
+    subject: '[PL어학원] 메일 발송 테스트 (' + CODE_VERSION + ')',
+    name: MAIL_FROM,
+    body: '이 메일이 도착하면 발송 기능은 정상입니다.
+받는 주소 : ' + MAIL_TO + '
+보낸 계정 : ' + Session.getEffectiveUser().getEmail(),
+  });
+  Logger.log(MAIL_TO + ' 로 보냈습니다. 남은 발송량 ' + MailApp.getRemainingDailyQuota() + '통');
+}
+
 function 후기시트_확인() {
   var db = readReviews_();
   Logger.log('시트 이름 : ' + db.sheet.getName());
