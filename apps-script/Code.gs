@@ -365,9 +365,7 @@ function 메일_한통_보내기() {
     to: MAIL_TO,
     subject: '[PL어학원] 메일 발송 테스트 (' + CODE_VERSION + ')',
     name: MAIL_FROM,
-    body: '이 메일이 도착하면 발송 기능은 정상입니다.
-받는 주소 : ' + MAIL_TO + '
-보낸 계정 : ' + Session.getEffectiveUser().getEmail(),
+    body: '이 메일이 도착하면 발송 기능은 정상입니다.\n받는 주소 : ' + MAIL_TO + '\n보낸 계정 : ' + Session.getEffectiveUser().getEmail(),
   });
   Logger.log(MAIL_TO + ' 로 보냈습니다. 남은 발송량 ' + MailApp.getRemainingDailyQuota() + '통');
 }
