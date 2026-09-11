@@ -151,10 +151,15 @@ body {
 .ham.on span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* ---------------------------------------------------------------- hero */
-.hero { position: relative; overflow: hidden; background: #16181c; color: #fff;
+/* 히어로 높이 — 모든 페이지 공통. 배경 이미지(1376×768, 16:9) 기준값입니다.
+   여기 숫자 하나만 바꾸면 전 페이지 히어로 높이가 함께 바뀝니다. */
+:root { --hero-h: 640px; }
 
-
- }
+.hero {
+  position: relative; overflow: hidden; background: #16181c; color: #fff;
+  min-height: var(--hero-h);
+  display: flex; align-items: center;
+}
 
 
 
@@ -237,10 +242,10 @@ body {
   -webkit-mask-image: radial-gradient(58% 75% at 22% 45%, #000 0%, transparent 100%);
 }
 
-.hero-inner { 
-  position: relative; z-index: 2;
+.hero-inner {
+  position: relative; z-index: 2; width: 100%;
   display: grid; grid-template-columns: 1.05fr .95fr; gap: 30px; align-items: center;
-  padding-top: 96px; padding-bottom: 96px;
+  padding-top: 56px; padding-bottom: 56px;
 }
 
 .hero-badge {
@@ -626,7 +631,7 @@ body {
    문의하기 / 수강후기 공통
    ========================================================================== */
 .hero-sm .hero-inner,
-.hero-sm2 .hero-inner { grid-template-columns: 1fr; padding-top: 76px; padding-bottom: 76px; }
+.hero-sm2 .hero-inner { grid-template-columns: 1fr; padding-top: 56px; padding-bottom: 56px; }
 .hero-sm .hero-title,
 .hero-sm2 .hero-title { font-size: 52px; }
 .hero-sm .hero-sub,
@@ -901,6 +906,8 @@ body {
   .hero-title { font-size: 40px; }
   .hero-sub { font-size: 21px; }
   /* 서브 히어로는 선택자가 더 구체적이라 여기서도 따로 눌러줘야 합니다 */
+  :root { --hero-h: 540px; }          /* 태블릿 이하 히어로 높이 */
+
   .hero-sm .hero-title,
   .hero-sm2 .hero-title { font-size: 40px; }
   .hero-sm .hero-sub,
@@ -935,6 +942,8 @@ body {
 }
 
 @media (max-width: 767px) {
+  :root { --hero-h: 640px; }          /* 모바일 히어로 높이 (제목이 길어도 잘리지 않는 값) */
+
   body { padding-bottom: 72px; }
   .inner { padding: 0 20px; }
 
