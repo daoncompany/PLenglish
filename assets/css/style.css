@@ -166,18 +166,18 @@ body {
    ========================================================================== */
 :root { --hero-img: none; }
 
-.page-main           { --hero-img: url('../img/index_img1.png'); }  /* 메인 */
-.page-conversation   { --hero-img: url('../img/index_img1.png'); }  /* 영어회화 */
-.page-toeic          { --hero-img: url('../img/index_img1.png'); }  /* 토익 */
-.page-toeic-speaking { --hero-img: url('../img/index_img1.png'); }  /* 토익스피킹 */
-.page-opic           { --hero-img: url('../img/index_img1.png'); }  /* 오픽 */
-.page-ielts          { --hero-img: url('../img/index_img1.png'); }  /* 아이엘츠 */
-.page-toefl          { --hero-img: url('../img/index_img1.png'); }  /* 토플 */
-.page-duolingo       { --hero-img: url('../img/index_img1.png'); }  /* 듀오링고 */
-.page-workingholiday { --hero-img: url('../img/index_img1.png'); }  /* 워홀대비반 */
-.page-interview      { --hero-img: url('../img/index_img1.png'); }  /* 영어인터뷰 */
-.page-reviews        { --hero-img: url('../img/index_img1.png'); }  /* 수강후기 */
-.page-contact        { --hero-img: url('../img/index_img1.png'); }  /* 문의하기 */
+.page-main           { --hero-img: url('../img/index_img1.png'); }        /* 메인 — 전용 이미지 없어 기존 유지 */
+.page-conversation   { --hero-img: url('../img/hero/conversation.jpg'); }   /* 영어회화 */
+.page-workingholiday { --hero-img: url('../img/hero/workingholiday.jpg'); } /* 워홀대비반 */
+.page-interview      { --hero-img: url('../img/hero/interview.jpg'); }      /* 영어인터뷰 */
+.page-ielts          { --hero-img: url('../img/hero/ielts.jpg'); }          /* 아이엘츠 */
+.page-toefl          { --hero-img: url('../img/hero/toefl.jpg'); }          /* 토플 */
+.page-opic           { --hero-img: url('../img/hero/opic.jpg'); }           /* 오픽 */
+.page-toeic          { --hero-img: url('../img/hero/toeic.jpg'); }          /* 토익 */
+.page-toeic-speaking { --hero-img: url('../img/hero/toeic-speaking.jpg'); } /* 토스 */
+.page-duolingo       { --hero-img: url('../img/hero/duolingo.jpg'); }       /* 듀오링고 */
+.page-reviews        { --hero-img: url('../img/hero/reviews.jpg'); }        /* 수강후기 */
+.page-contact        { --hero-img: url('../img/hero/contact.jpg'); }        /* 문의하기 */
 
 /* 히어로 배경 레이어 — 반드시 absolute + inset:0 이어야 화면을 채웁니다.
    (이게 빠지면 빈 div라 높이가 0 → 배경이 아예 안 보입니다)
