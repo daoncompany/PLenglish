@@ -94,6 +94,8 @@ body {
   background: var(--red); color: #fff;
   font-size: 19px; font-weight: 800; letter-spacing: -.04em;
 }
+/* 로고 마크 안의 PL 심볼 (layout.js 의 LOGO_MARK) */
+.logo-mark svg { width: 21px; height: 20px; fill: #fff; display: block; }
 .logo-txt { font-size: 21px; font-weight: 800; letter-spacing: -.045em; }
 
 .gnb { flex: 1; display: flex; align-items: center; }
