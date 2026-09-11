@@ -166,7 +166,7 @@ body {
    ========================================================================== */
 :root { --hero-img: none; }
 
-.page-main           { --hero-img: url('../img/index_img1.png'); }        /* 메인 — 전용 이미지 없어 기존 유지 */
+.page-main           { --hero-img: url('../img/hero/index.jpg'); }         /* 메인 */
 .page-conversation   { --hero-img: url('../img/hero/conversation.jpg'); }   /* 영어회화 */
 .page-workingholiday { --hero-img: url('../img/hero/workingholiday.jpg'); } /* 워홀대비반 */
 .page-interview      { --hero-img: url('../img/hero/interview.jpg'); }      /* 영어인터뷰 */
