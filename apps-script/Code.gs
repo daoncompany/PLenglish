@@ -28,7 +28,7 @@ var HIDDEN_NOS   = [88, 105, 106];
 
 // 배포 확인용 표시 — 코드를 고쳐 새로 배포할 때마다 날짜를 바꿔두면
 // 웹앱 주소를 브라우저로 열었을 때 어느 버전이 돌고 있는지 바로 알 수 있습니다.
-var CODE_VERSION = '2026-09-10c';
+var CODE_VERSION = '2026-10-12';
 /* ▲▲▲ ------------------------------------ ▲▲▲ */
 
 
@@ -79,7 +79,7 @@ function inquiry_(data) {
   if (!name || !email || !message || !phone || !callTime) return { result: 'error', message: '필수 항목이 비어 있습니다.' };
 
   // 통화가능시간은 기존 데이터와 어긋나지 않도록 맨 끝 칸에 넣습니다.
-  getInquirySheet_().appendRow([new Date(), name, email, phone || '(미기재)', message, data.page || '', callTime || '(미선택)']);
+  getInquirySheet_().appendRow([new Date(), name, email, phone, message, data.page || '', callTime]);
 
   /* GmailApp 을 쓰면 [답장] 이 문의하신 분에게 연결됩니다.
      (MailApp 은 환경에 따라 Reply-To 가 무시되어 보낸 계정으로 답장이 갑니다) */
@@ -88,19 +88,14 @@ function inquiry_(data) {
       '홈페이지 온라인 문의가 접수되었습니다.\n\n' +
       '■ Name (이름)      : ' + name + '\n' +
       '■ E-mail (이메일)   : ' + email + '\n' +
-      '■ C.P (핸드폰)      : ' + (phone || '(미기재)') + '\n' +
-      '■ Call time (통화가능시간) : ' + (callTime || '(미선택)') + '\n\n' +
+      '■ C.P (핸드폰)      : ' + phone + '\n' +
+      '■ Call time (통화가능시간) : ' + callTime + '\n\n' +
       '■ Counsel about classes (수강문의)\n' + message + '\n\n' +
       '--------------------------------------\n' +
       '접수일시 : ' + now_() + '\n' +
       '접수경로 : ' + (data.page || '홈페이지 문의 폼') + '\n' +
       '\n※ 이 메일에 그대로 [답장]하면 문의하신 분(' + email + ')에게 회신됩니다.';
-  var opts_ = { name: MAIL_FROM, replyTo: email };
-  try {
-    GmailApp.sendEmail(MAIL_TO, subject_, body_, opts_);
-  } catch (e) {
-    MailApp.sendEmail({ to: MAIL_TO, subject: subject_, body: body_, name: MAIL_FROM, replyTo: email });
-  }
+  GmailApp.sendEmail(MAIL_TO, subject_, body_, { name: MAIL_FROM, replyTo: email });
 
   return { result: 'ok' };
 }
@@ -111,8 +106,8 @@ function getInquirySheet_() {
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.appendRow(['접수일시', '이름', '이메일', '연락처', '수강문의 내용', '유입 페이지', '통화가능시간']);
-    sheet.getRange(1, 1, 1, 6).setFontWeight('bold').setBackground('#f5f6f8');
-    sheet.setColumnWidths(1, 6, 150);
+    sheet.getRange(1, 1, 1, 7).setFontWeight('bold').setBackground('#f5f6f8');
+    sheet.setColumnWidths(1, 7, 150);
     sheet.setColumnWidth(5, 480);
     sheet.setFrozenRows(1);
   }
