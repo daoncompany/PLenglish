@@ -72,7 +72,7 @@ window.PL_CONTACT = {
     var from = $('fCallFrom'), to = $('fCallTo');
     if (!from || !from.value) return '';
     if (from.value === '언제든 가능') return '언제든 가능';
-    return to && to.value ? from.value + ' ~ ' + to.value : from.value + ' 이후';
+    return from.value + ' ~ ' + to.value;
   }
 
   /* ---------------------------------------------- 검증 */
@@ -147,8 +147,8 @@ window.PL_CONTACT = {
     var body = [
       '■ Name (이름) : ' + d.name,
       '■ E-mail (이메일) : ' + d.email,
-      '■ C.P (핸드폰) : ' + (d.phone || '(미기재)'),
-      '■ Call time (통화가능시간) : ' + (d.callTime || '(미선택)'),
+      '■ C.P (핸드폰) : ' + d.phone,
+      '■ Call time (통화가능시간) : ' + d.callTime,
       '',
       '■ Counsel about classes (수강문의)',
       d.message,
@@ -214,7 +214,6 @@ window.PL_CONTACT = {
     sendByScript(d)
       .then(function () {
         form.reset();
-        syncCallTime();
         ['fName', 'fEmail', 'fPhone', 'fCallFrom', 'fMessage', 'fAgree'].forEach(function (id) { setError(id, ''); });
         showResult('ok', successHtml(d));
       })
