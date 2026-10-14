@@ -27,7 +27,7 @@ window.PL_CONTACT = {
   var cfg = function () { return window.PL_CONTACT || {}; };
 
   /* ---------------------------------------------- 통화가능시간 (30분 단위) */
-  var CALL_OPEN = 10, CALL_CLOSE = 22;      // 운영시간 (평일 10:00 ~ 22:00)
+  var CALL_OPEN = 10, CALL_CLOSE = 22;      // 운영시간 (매일 10:00 ~ 22:00)
 
   function timeSlots() {
     var out = [];
