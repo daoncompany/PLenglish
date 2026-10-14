@@ -69,8 +69,8 @@ body {
 .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
 .btn-dark { background: var(--ink); color: #fff; }
 .btn-dark:hover { background: #000; transform: translateY(-2px); }
-.btn-ghost { border: 1.5px solid rgba(255, 255, 255, .45); color: #fff; }
-.btn-ghost:hover { background: rgba(255, 255, 255, .12); border-color: #fff; }
+.btn-ghost { border: 1.5px solid var(--line); color: var(--ink); background: #fff; }
+.btn-ghost:hover { border-color: var(--ink); background: var(--bg-soft); }
 .btn-line { border: 1.5px solid var(--line); color: var(--gray-800); background: #fff; }
 .btn-line:hover { border-color: var(--ink); color: var(--ink); }
 
@@ -156,7 +156,7 @@ body {
 :root { --hero-h: 640px; }
 
 .hero {
-  position: relative; overflow: hidden; background: #16181c; color: #fff;
+  position: relative; overflow: hidden; background: #fff; color: var(--ink);
   min-height: var(--hero-h);
   display: flex; align-items: center;
 }
@@ -171,60 +171,31 @@ body {
    ========================================================================== */
 :root { --hero-img: none; }
 
-.page-main           { --hero-img: url('../img/hero/index.jpg'); }         /* 메인 */
-.page-conversation   { --hero-img: url('../img/hero/conversation.jpg'); }   /* 영어회화 */
-.page-workingholiday { --hero-img: url('../img/hero/workingholiday.jpg'); } /* 워홀대비반 */
-.page-interview      { --hero-img: url('../img/hero/interview.jpg'); }      /* 영어인터뷰 */
-.page-ielts          { --hero-img: url('../img/hero/ielts.jpg'); }          /* 아이엘츠 */
-.page-toefl          { --hero-img: url('../img/hero/toefl.jpg'); }          /* 토플 */
-.page-opic           { --hero-img: url('../img/hero/opic.jpg'); }           /* 오픽 */
-.page-toeic          { --hero-img: url('../img/hero/toeic.jpg'); }          /* 토익 */
-.page-toeic-speaking { --hero-img: url('../img/hero/toeic-speaking.jpg'); } /* 토스 */
-.page-duolingo       { --hero-img: url('../img/hero/duolingo.jpg'); }       /* 듀오링고 */
-.page-reviews        { --hero-img: url('../img/hero/reviews.jpg'); }        /* 수강후기 */
-.page-contact        { --hero-img: url('../img/hero/contact.jpg'); }        /* 문의하기 */
+.page-main           { --hero-img: url('../img/hero/index.webp'); }         /* 메인 */
+.page-conversation   { --hero-img: url('../img/hero/conversation.webp'); }   /* 영어회화 */
+.page-workingholiday { --hero-img: url('../img/hero/workingholiday.webp'); } /* 워홀대비반 */
+.page-interview      { --hero-img: url('../img/hero/interview.webp'); }      /* 영어인터뷰 */
+.page-ielts          { --hero-img: url('../img/hero/ielts.webp'); }          /* 아이엘츠 */
+.page-toefl          { --hero-img: url('../img/hero/toefl.webp'); }          /* 토플 */
+.page-opic           { --hero-img: url('../img/hero/opic.webp'); }           /* 오픽 */
+.page-toeic          { --hero-img: url('../img/hero/toeic.webp'); }          /* 토익 */
+.page-toeic-speaking { --hero-img: url('../img/hero/toeic-speaking.webp'); } /* 토스 */
+.page-certification  { --hero-img: url('../img/hero/certification.webp'); }  /* 인증시험 — 전용 사진 준비되면 교체 */
+.page-gtelp          { --hero-img: url('../img/hero/gtelp.webp'); }          /* 지텔프 — 전용 사진 준비되면 교체 */
+.page-duolingo       { --hero-img: url('../img/hero/duolingo.webp'); }       /* 듀오링고 */
+.page-reviews        { --hero-img: url('../img/hero/reviews.webp'); }        /* 수강후기 */
+.page-contact        { --hero-img: url('../img/hero/contact.webp'); }        /* 문의하기 */
 
 /* 히어로 배경 레이어 — 반드시 absolute + inset:0 이어야 화면을 채웁니다.
    (이게 빠지면 빈 div라 높이가 0 → 배경이 아예 안 보입니다)
    background 는 "먼저 쓴 것이 위" — 쓰는 순서가 곧 레이어 순서입니다.     */
 .hero-bg {
   position: absolute; inset: 0;
-  background:
-    /* 1. 붉은빛 그라데이션 (왼쪽 아래) */
-    radial-gradient(58% 78% at 16% 78%, rgba(232, 41, 28, .55) 0%, rgba(232, 41, 28, 0) 62%),
-
-    /* 2. 푸른빛 그라데이션 (왼쪽 위) */
-    radial-gradient(52% 62% at 8% 12%, rgba(59, 96, 160, .5) 0%, rgba(59, 96, 160, 0) 66%),
-
-    /* 3. 왼쪽을 어둡게 덮어 글자가 잘 읽히게 하는 가림막 (사진 위 / 그라데이션 아래)
-          → 사진을 더 보이게 하려면 46% · 68% 값을 키우세요 */
-    linear-gradient(90deg,
-      #14161a 0%,
-      rgba(20, 22, 26, .97) 30%,
-      rgba(20, 22, 26, .78) 46%,
-      rgba(20, 22, 26, .30) 68%,
-      rgba(20, 22, 26, .12) 100%),
-
-    /* 4. 오른쪽 사진 (페이지별 --hero-img 값) */
-    var(--hero-img) no-repeat right center / cover,
-
-    /* 5. 바탕 다크 그라데이션 */
-    linear-gradient(120deg, #14161a 0%, #23272e 100%);
+  background: var(--hero-img) no-repeat right center / cover;
 }
 
-/* 사진을 배경으로 쓰므로 히어로 우측의 이미지 자리표시 박스는 숨깁니다.
-   (박스를 다시 쓰려면 이 규칙만 지우면 됩니다) */
 .hero-visual { display: none; }
 
-/* 격자 패턴은 사진 쪽을 지저분하게 만들지 않도록 왼쪽에만 */
-.hero-bg::after {
-  content: ''; position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(58% 75% at 22% 45%, #000 0%, transparent 100%);
-  -webkit-mask-image: radial-gradient(58% 75% at 22% 45%, #000 0%, transparent 100%);
-}
 
 .hero-inner {
   position: relative; z-index: 2; width: 100%;
@@ -234,7 +205,7 @@ body {
 
 .hero-badge {
   display: inline-block; padding: 8px 16px; border-radius: 100px;
-  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .2);
+  background: var(--red-soft); border: 1px solid #ffd0cb; color: var(--red);
   font-size: 13px; font-weight: 700; letter-spacing: .08em;
 }
 
@@ -245,12 +216,9 @@ body {
 
 .hero-sub {
   position: relative; display: inline-block; margin-top: 22px; padding-bottom: 6px;
+  padding: 8px 18px; border-radius: 8px;
   font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -.04em;
-}
-
-.hero-sub::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 10px;
-  background: var(--red); opacity: .85; z-index: -1;
+  background: var(--red);
 }
 
 .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
@@ -261,13 +229,13 @@ body {
 
   padding: 9px 16px; border-radius: 100px;
 
-  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14);
+  background: #fff; border: 1px solid var(--line);
 
-  font-size: 14px; font-weight: 500; color: rgba(255, 255, 255, .88);
+  font-size: 14px; font-weight: 500; color: var(--gray-800);
 
 }
 
-.hero-chips li::before { content: '✓'; margin-right: 6px; color: #ff8078; font-weight: 700; }
+.hero-chips li::before { content: '✓'; margin-right: 6px; color: var(--red); font-weight: 700; }
 
 
 
@@ -509,7 +477,7 @@ body {
 .tt-note li { position: relative; padding-left: 16px; margin-top: 8px; font-size: 14.5px; color: var(--gray-600); line-height: 1.7; }
 .tt-note li::before { content: ''; position: absolute; left: 0; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400); }
 .tt-note b { color: var(--red); font-weight: 700; }
-.tt-cta { margin-top: 40px; text-align: center; }
+.tt-cta { margin-top: 40px; text-align: center; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
 /* ---------------------------------------------------------------- course (main) */
 .sec-course { background: #fff; }
@@ -547,8 +515,7 @@ body {
 .ct-box {
   display: grid; grid-template-columns: 1.05fr .95fr; gap: 50px; align-items: center;
   padding: 66px 60px; border-radius: 28px; color: #fff;
-  background: linear-gradient(120deg, #c3140a 0%, #e8291c 55%, #ff5a4d 100%);
-  box-shadow: 0 26px 60px rgba(232, 41, 28, .25);
+  background: var(--ink);
 }
 .ct-copy h2 { font-size: 36px; font-weight: 800; line-height: 1.35; letter-spacing: -.045em; }
 .ct-copy h2 b { font-weight: 800; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 4px; }
@@ -561,7 +528,7 @@ body {
 }
 .ct-btn span { font-size: 15px; font-weight: 600; color: rgba(255, 255, 255, .9); }
 .ct-btn b { font-size: 20px; font-weight: 800; letter-spacing: -.03em; }
-.ct-btn:hover { background: #fff; color: var(--red-dark); transform: translateY(-3px); }
+.ct-btn:hover { background: #fff; color: var(--ink); transform: translateY(-3px); }
 .ct-btn:hover span { color: var(--gray-600); }
 .ct-btn.kakao:hover { background: #fee500; color: #3b1e1e; }
 
@@ -900,15 +867,8 @@ body {
   .hero-sm .hero-sub,
   .hero-sm2 .hero-sub { font-size: 21px; }
 
-  /* 태블릿부터는 1단 레이아웃이라 글자가 사진 위로 올라옵니다 → 막을 더 진하게 */
-  .hero-bg {
-    background:
-      radial-gradient(58% 62% at 14% 20%, rgba(232, 41, 28, .45) 0%, rgba(232, 41, 28, 0) 62%),
-      radial-gradient(58% 58% at 6% 86%, rgba(59, 96, 160, .42) 0%, rgba(59, 96, 160, 0) 66%),
-      linear-gradient(180deg, rgba(20, 22, 26, .93) 0%, rgba(20, 22, 26, .86) 55%, rgba(20, 22, 26, .95) 100%),
-      var(--hero-img) no-repeat center center / cover,
-      linear-gradient(120deg, #14161a 0%, #23272e 100%);
-  }
+  /* 태블릿부터는 1단 레이아웃 — 사진을 가운데 정렬해 인물이 잘리지 않게 */
+  .hero-bg { background: var(--hero-img) no-repeat center center / cover; }
 
   .sec { padding: 80px 0; }
   .sec-title { font-size: 32px; }
@@ -932,21 +892,17 @@ body {
   body { padding-bottom: 72px; }
   .inner { padding: 0 20px; }
 
-  /* 모바일에서는 사진을 빼고 그라데이션만 (background-image:none 을 쓰면
-     그라데이션도 함께 사라지므로 shorthand 로 다시 선언합니다.
-     사진을 모바일에도 넣고 싶으면 위 태블릿 규칙을 그대로 복사해 쓰면 됩니다) */
+  /* 모바일 — 글자가 사진 위로 올라오므로 사진을 흐리게 깔고 흰 막을 덮습니다 */
   .hero-bg {
     background:
-      radial-gradient(60% 60% at 82% 12%, rgba(232, 41, 28, .42) 0%, rgba(232, 41, 28, 0) 62%),
-      radial-gradient(60% 55% at 8% 88%, rgba(59, 96, 160, .38) 0%, rgba(59, 96, 160, 0) 66%),
-      linear-gradient(120deg, #14161a 0%, #23272e 100%);
+      linear-gradient(180deg, rgba(255, 255, 255, .82) 0%, rgba(255, 255, 255, .72) 100%),
+      var(--hero-img) no-repeat center center / cover;
   }
 
 
   .hero-inner { padding-top: 48px; padding-bottom: 56px; }
   .hero-title { font-size: 30px; line-height: 1.34; }
   .hero-sub { font-size: 18px; }
-  .hero-sub::after { height: 8px; }
   .hero-btns { flex-direction: column; align-items: stretch; margin-top: 30px; }
   .hero-btns .btn { width: 100%; }
   .hero-chips li { font-size: 13px; padding: 8px 13px; }

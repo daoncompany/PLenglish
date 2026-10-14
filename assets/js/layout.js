@@ -5,7 +5,7 @@
 (function () {
   var TEL      = '032-544-3352';
   var TEL_HREF = 'tel:' + TEL.replace(/-/g, '');
-  var HOURS    = '평일 10:00 ~ 22:00';
+  var HOURS    = '매일 10:00 ~ 22:00';
   var KAKAO    = '#';                 // 카카오톡 채널 링크로 교체
   var BRAND    = 'PL어학원';
 
@@ -20,7 +20,10 @@
     ['opic.html',           '오픽'],
     ['toeic.html',          '토익'],
     ['toeic-speaking.html', '토스'],
-    ['duolingo.html',       '듀오링고'],
+    ['certification.html',  '인증시험', [
+      ['gtelp.html',          '지텔프'],
+      ['duolingo.html',       '듀오링고']
+    ]],
     ['reviews.html',        '수강후기'],
     ['contact.html',        '문의하기']
   ];
@@ -88,13 +91,14 @@
       '            <td><span class="tt-item">월 · 수 · 금</span><span class="tt-item">화 · 목 · 금</span></td>\n' +
       '            <td>수업 시간대는 유동적으로 조율합니다.</td></tr>\n' +
       '          <tr><th scope="row">1:1 개인</th>\n' +
-      '            <td><span class="tt-item">주 1회 ~ 주 5회</span></td>\n' +
+      '            <td><span class="tt-item">주 1회 ~ 주 5회</span><span class="tt-item">주말 가능</span></td>\n' +
       '            <td>횟수 · 요일 · 시간 모두 학생 스케줄에 맞춰 편성합니다.</td></tr>\n' +
       '        </tbody>\n' +
       '      </table>\n' +
       '    </div>\n' +
       '    <ul class="tt-note reveal">\n' +
-      '      <li>모든 수업은 <b>대면(방문) 수업</b>이 기준이며, <b>화상수업(줌)</b>으로도 동일하게 수강하실 수 있습니다.</li>\n' +
+      '      <li>모든 수업은 <b>대면 수업</b>이 기준입니다.</li>\n' +
+      '      <li>거리나 시간 상 대면수업이 불가피한 경우 <b>줌 수업</b> 가능합니다.</li>\n' +
       '      <li>주 2회 · 주 3회 요일은 위 조합을 기준으로 하며, 시간대는 상담 시 함께 정합니다.</li>\n' +
       '      <li>공휴일 휴강 및 보강 일정은 개별 안내드립니다.</li>\n' +
       '    </ul>\n' +
@@ -134,7 +138,7 @@
       '    </div>\n' +
       '    <div class="ft-info">\n' +
       '      <p>상호 ' + BRAND + ' &nbsp;|&nbsp; 대표 이민환 &nbsp;|&nbsp; 사업자등록번호 106-90-53956</p>\n' +
-      '      <p>주소 인천 계양구 계산동 917-11 태영빌딩 2층 &nbsp;|&nbsp; 대표전화 ' + TEL + ' &nbsp;|&nbsp; 운영시간 평일 10:00~22:00 / 토 10:00~17:00</p>\n' +
+      '      <p>주소 인천 계양구 계산동 917-11 태영빌딩 2층 &nbsp;|&nbsp; 대표전화 ' + TEL + ' &nbsp;|&nbsp; 운영시간 매일 10:00~22:00</p>\n' +
       '      <p class="ft-copy">&copy; Daondotcom. All rights reserved.</p>\n' +
       '    </div>\n' +
       '  </div>\n' +
