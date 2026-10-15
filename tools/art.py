@@ -47,52 +47,5 @@ PICTO = {
           '<circle class="f" cx="137" cy="47" r="4"/><circle class="f" cx="149" cy="47" r="4"/><circle class="f" cx="161" cy="47" r="4"/>',
 }
 
-# V3 — 플랫 인물 일러스트 (면 채움 + 가는 외곽선). 색은 여기 팔레트만 바꾸면 됨
-C = dict(coral='#f0614a', yellow='#f7b733', navy='#26315f', peri='#7d82e8', skin='#f5c6a5',
-         hair='#2b2233', wood='#dcb497', table='#fff7f0', bub='#f0c2b0', clock='#f6e3d0', shadow='#e7cdbd')
-
-def _f(s):
-    return s.format(**C)
-
-ILLUST = {
- 'index': _f(
-  # 바닥 그림자 · 벽시계
-  '<ellipse cx="104" cy="187" rx="92" ry="5" fill="{shadow}" stroke="none"/>'
-  '<circle cx="108" cy="30" r="9" fill="{clock}"/><path d="M108 24v6l4 3"/>'
-  # 의자 (수강생)
-  '<path d="M156 104q24 0 24 30v8h-26z" fill="{wood}"/><path d="M158 142l-4 44M176 142l4 44"/>'
-  # 수강생 — 앉아서 왼쪽을 봄
-  '<path d="M138 122L118 124v10h32q14 0 14-10z" fill="{navy}"/>'
-  '<path d="M118 124l-6 56h10l6-46z" fill="{navy}"/><path d="M106 180h17v6h-21q0-6 4-6z" fill="{coral}"/>'
-  '<path d="M136 128l2-32q1-10 12-11 11 1 13 11l2 32z" fill="{peri}"/>'
-  '<rect x="147" y="80" width="6" height="7" fill="{skin}"/>'
-  '<circle cx="161" cy="59" r="5.5" fill="{hair}"/>'
-  '<circle cx="150" cy="72" r="10" fill="{skin}"/>'
-  '<path d="M140 71q-1-15 11-15 11 0 10 14-6-7-12-6-5 0-9 7z" fill="{hair}"/>'
-  '<circle cx="145" cy="71" r="1.1" fill="{hair}" stroke="none"/><path d="M142 77q3 2 6 0" fill="none"/>'
-  ''
-  # 테이블 · 책 · 노트북
-  '<rect x="78" y="126" width="114" height="5" rx="1.5" fill="{table}"/>'
-  '<rect x="84" y="131" width="3" height="56" fill="{wood}"/><rect x="183" y="131" width="3" height="56" fill="{wood}"/>'
-  '<rect x="88" y="121" width="22" height="5" fill="{coral}"/><rect x="90" y="116" width="19" height="5" fill="{yellow}"/>'
-  '<rect x="87" y="111" width="21" height="5" fill="{peri}"/>'
-  '<path d="M118 126l-4-22h20l2 22z" fill="{navy}"/><circle cx="125" cy="114" r="1.6" fill="#fff" stroke="none"/>'
-  '<path d="M146 98l-9 20 6 3 9-19z" fill="{peri}"/><circle cx="139" cy="122" r="3.5" fill="{skin}"/>'
-  # 선생님 — 서서 오른쪽을 보며 설명
-  '<path d="M39 118l-3 62h14l3-48 3 48h14l-3-62z" fill="{yellow}"/>'
-  '<path d="M33 180h18v6H29q0-6 4-6z" fill="{navy}"/><path d="M55 180h18q5 0 5 6H55z" fill="{navy}"/>'
-  '<path d="M38 120l2-34q1-10 12-11 11 1 13 11l2 34z" fill="{coral}"/>'
-  '<rect x="49" y="70" width="6" height="7" fill="{skin}"/>'
-  '<circle cx="52" cy="62" r="10" fill="{skin}"/><circle cx="44.5" cy="64" r="2" fill="{skin}"/>'
-  '<path d="M42 61q0-14 12-14 11 0 11 10-4-3-10-2-6 1-13 6z" fill="{hair}"/>'
-  '<circle cx="57" cy="61" r="1.1" fill="{hair}" stroke="none"/><path d="M55 67q3 2 6-1" fill="none"/>'
-  '<path d="M60 82l24 10-2 7-24-7z" fill="{coral}"/><circle cx="86.5" cy="95.5" r="4" fill="{skin}"/>'
-  '<path d="M41 84l-7 24 6 2 6-20z" fill="{coral}"/>'
-  '<rect x="29" y="104" width="9" height="13" rx="1" fill="{navy}" transform="rotate(-12 33 110)"/><circle cx="37" cy="111" r="3.5" fill="{skin}"/>'
-  # 말풍선
-  '<rect x="58" y="20" width="36" height="21" rx="10.5" fill="#fff"/><path d="M68 40l-3 7 9-6" fill="#fff"/>'
-  '<text x="76" y="34.5" font-size="10" font-weight="800" text-anchor="middle" fill="#e8291c" stroke="none">Hi!</text>'
-  '<rect x="124" y="30" width="32" height="18" rx="9" fill="{bub}"/><path d="M136 47l2 7 5-7" fill="{bub}"/>'
-  '<circle cx="133" cy="39" r="1.6" fill="#fff" stroke="none"/><circle cx="140" cy="39" r="1.6" fill="#fff" stroke="none"/><circle cx="147" cy="39" r="1.6" fill="#fff" stroke="none"/>'
- ),
-}
+# V3 — 제미나이로 만든 이미지로 교체 예정. 비어 있으면 V1 사진이 나온다
+ILLUST = {}
