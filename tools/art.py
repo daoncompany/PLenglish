@@ -28,9 +28,9 @@ PICTO = {
  'opic': '<rect x="78" y="34" width="44" height="78" rx="22"/><path d="M78 72h14M108 72h14M78 88h14M108 88h14"/>'
           '<path d="M58 96a42 42 0 0 0 84 0M100 138v24M74 164h52"/>'
           '<path class="a" d="M152 60a26 26 0 0 1 0 40M164 48a44 44 0 0 1 0 64M48 60a26 26 0 0 0 0 40M36 48a44 44 0 0 0 0 64"/>',
- 'toeic': '<rect x="46" y="26" width="108" height="150" rx="12"/><path d="M66 48h68"/>'
-          + ''.join(f'<circle cx="{x}" cy="{y}" r="7"/>' for y in (76, 102, 128, 154) for x in (72, 94, 116, 138))
-          + ''.join(f'<circle class="f" cx="{x}" cy="{y}" r="7"/>' for x, y in ((94, 76), (138, 102), (72, 128), (116, 154))),
+ 'toeic': '<rect x="118" y="28" width="60" height="90" rx="10"/><path d="M132 52h32M132 70h32M132 88h20"/>'  # RC 문서
+          '<path d="M31 140v-10a43 43 0 0 1 86 0v10"/>'  # LC 헤드폰 밴드
+          '<rect class="a" x="20" y="140" width="22" height="42" rx="11"/><rect class="a" x="106" y="140" width="22" height="42" rx="11"/>',
  'toeic-speaking': '<circle cx="88" cy="116" r="54"/><path d="M76 50h24M88 50v12M130 70l8-8"/>'
           '<path class="a" d="M88 116V82M88 116l22 14"/><path d="M88 70v4M88 158v4M42 116h4M130 116h4"/>'
           '<rect class="a" x="128" y="22" width="52" height="38" rx="12"/><path class="a" d="M142 60l-5 12 15-12M141 37h26M141 46h16"/>',
