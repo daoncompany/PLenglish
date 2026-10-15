@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>수강후기 | PL어학원</title>
+<meta name="description" content="PL어학원 수강생들이 직접 남긴 생생한 수강후기입니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/css/style.css?v=20261015">
+<link rel="stylesheet" href="assets/css/hero.css?v=20261015">
+<meta name="robots" content="noindex">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="page-reviews">
+<script src="../assets/js/layout.js?v=20261015"></script>
+
+<main>
+<section class="hero hero-sm">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="inner hero-inner">
+      <div class="hero-copy">
+        <span class="hero-badge">REVIEW</span>
+        <!-- 타이틀 후킹문구 -->
+        <h1 class="hero-title">같은 고민으로 시작한 분들이<br>어떻게 끝냈는지</h1>
+        <!-- 서브 보조문구 -->
+        <p class="hero-sub">123건의 수강 후기</p>
+        <ul class="hero-chips">
+          <li>누적 후기 100건 이상</li>
+          <li>재학생 · 수료생 직접 작성</li>
+          <li>누구나 열람 가능</li>
+        </ul>
+      </div>
+    <div class="hero-visual"><svg class="hv" viewBox="0 0 200 200" aria-hidden="true"><path d="M58 52h84a22 22 0 0 1 22 22v40a22 22 0 0 1-22 22H90l-28 24v-24h-4a22 22 0 0 1-22-22V74a22 22 0 0 1 22-22z"/><polygon class="a" points="70.0,80.0 66.8,87.6 58.6,88.3 64.9,93.7 62.9,101.7 70.0,97.4 77.1,101.7 75.1,93.7 81.4,88.3 73.2,87.6"/><polygon class="a" points="100.0,80.0 96.8,87.6 88.6,88.3 94.9,93.7 92.9,101.7 100.0,97.4 107.1,101.7 105.1,93.7 111.4,88.3 103.2,87.6"/><polygon class="a" points="130.0,80.0 126.8,87.6 118.6,88.3 124.9,93.7 122.9,101.7 130.0,97.4 137.1,101.7 135.1,93.7 141.4,88.3 133.2,87.6"/></svg></div>
+    </div>
+  </section>
+
+  <section class="sec sec-board">
+    <div class="inner">
+      <!-- 목록 -->
+      <div class="board" id="boardList">
+        <p class="board-status" id="boardStatus" hidden></p>
+        <div class="board-top">
+          <p class="board-count">전체 <b id="totalCount">0</b>건</p>
+          <div class="board-search">
+            <label for="searchInput" class="blind">후기 검색</label>
+            <input type="search" id="searchInput" placeholder="제목 · 작성자 검색">
+            <button type="button" id="searchBtn" class="btn btn-dark btn-sm">검색</button>
+          </div>
+        </div>
+
+        <table class="bd-table">
+          <caption class="blind">수강후기 목록</caption>
+          <colgroup><col style="width:80px"><col><col style="width:130px"><col style="width:120px"><col style="width:90px"></colgroup>
+          <thead>
+            <tr><th scope="col">번호</th><th scope="col">제목</th><th scope="col">글쓴이</th><th scope="col">등록일</th><th scope="col">조회</th></tr>
+          </thead>
+          <tbody id="boardBody"></tbody>
+        </table>
+
+        <div class="bd-paging" id="paging"></div>
+
+        <div class="bd-btns">
+          <a href="#" class="btn btn-red" id="writeBtn">후기 작성하기</a>
+        </div>
+      </div>
+
+      <!-- 상세 -->
+      <div class="board bd-view" id="boardView" hidden>
+        <div class="bd-view-head">
+          <h2 id="viewTitle"></h2>
+          <ul class="bd-meta">
+            <li>글쓴이 <b id="viewWriter"></b></li>
+            <li>등록일 <b id="viewDate"></b></li>
+            <li>조회 <b id="viewHit"></b></li>
+          </ul>
+        </div>
+        <div class="bd-view-body" id="viewBody"></div>
+        <div class="bd-view-nav" id="viewNav"></div>
+        <div class="bd-btns">
+          <a href="#" class="btn btn-line" id="backBtn">목록으로</a>
+          <!-- 본인이 작성한 글에서만 노출됩니다 -->
+          <button type="button" class="btn btn-line" id="editBtn" hidden>수정</button>
+          <button type="button" class="btn btn-line btn-del" id="delBtn" hidden>삭제</button>
+          <a href="contact.html" class="btn btn-red">수업 문의하기</a>
+        </div>
+      </div>
+
+      <!-- 글쓰기 -->
+      <div class="board bd-write" id="boardWrite" hidden>
+        <div class="form-head">
+          <span class="sec-label" id="writeLabel">WRITE</span>
+          <h2 id="writeTitle">수강후기 작성</h2>
+          <p id="writeDesc">수업을 들으며 느낀 점을 자유롭게 남겨주세요. 작성하신 후기는 목록 맨 위에 등록됩니다.</p>
+        </div>
+        <form id="reviewForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="rWriter">글쓴이 <em class="req">*</em></label>
+              <input type="text" id="rWriter" placeholder="이름 또는 닉네임" maxlength="20" required>
+              <p class="err" data-for="rWriter"></p>
+            </div>
+            <div class="field">
+              <label for="rPass">비밀번호 <em class="req">*</em></label>
+              <input type="password" id="rPass" placeholder="4자 이상" maxlength="20" autocomplete="new-password" required>
+              <p class="err" data-for="rPass"></p>
+              <p class="field-help" id="passHelp">글을 수정 · 삭제할 때 필요합니다. 잊지 않도록 기억해 주세요.</p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="rTitle">제목 <em class="req">*</em></label>
+            <input type="text" id="rTitle" placeholder="제목을 입력해 주세요" maxlength="60" required>
+            <p class="err" data-for="rTitle"></p>
+          </div>
+          <div class="field">
+            <label for="rContent">내용 <em class="req">*</em></label>
+            <textarea id="rContent" rows="12" placeholder="어떤 수업을 들으셨는지, 어떤 점이 좋았는지 적어주세요." required></textarea>
+            <p class="err" data-for="rContent"></p>
+          </div>
+          <div class="form-btns">
+            <button type="submit" class="btn btn-red btn-lg" id="submitBtn">등록하기</button>
+            <a href="#" class="btn btn-line btn-lg" id="cancelWrite">취소</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- 비밀번호 확인 -->
+      <div class="pw-modal" id="pwModal" hidden>
+        <div class="pw-dim" id="pwDim"></div>
+        <div class="pw-box" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+          <h3 id="pwTitle">비밀번호 확인</h3>
+          <p id="pwDesc">글 작성 시 입력하신 비밀번호를 입력해 주세요.</p>
+          <label for="pwInput" class="blind">비밀번호</label>
+          <input type="password" id="pwInput" placeholder="비밀번호" autocomplete="current-password" maxlength="20">
+          <p class="err" data-for="pwInput"></p>
+          <div class="pw-btns">
+            <button type="button" class="btn btn-red" id="pwOk">확인</button>
+            <button type="button" class="btn btn-line" id="pwCancel">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>PL.footer();</script>
+<script src="../assets/js/common.js?v=20261015"></script>
+<script src="../assets/js/reviews-data.js?v=20261015"></script>
+<script src="../assets/js/reviews.js?v=20261015"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* 시안 버전 히어로 — 공통 style.css 다음에 읽어서 히어로 비주얼만 덮어씁니다.
+   hero-visual 안에 SVG 가 있는 페이지만 사진을 끄고 선화를 보여줍니다. */
+
+.hero:has(.hero-visual svg) .hero-bg { display: none; }
+.hero:has(.hero-visual svg) { background: linear-gradient(180deg, #fff 0%, var(--bg-soft) 100%); }
+
+.hero-visual:has(svg) {
+  display: block; position: relative;
+  width: 100%; max-width: 440px; aspect-ratio: 1; margin-left: auto;
+}
+.hero-visual:has(svg)::before {
+  content: ''; position: absolute; inset: 6%;
+  border-radius: 50%; background: var(--red-soft);
+}
+.hv {
+  position: relative; width: 100%; height: 100%; display: block;
+  fill: none; stroke: var(--ink); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round;
+}
+.hv .a { stroke: var(--red); }
+.hv .f { fill: var(--red); stroke: none; }
+.hv .e { fill: var(--ink); stroke: none; }
+
+/* 수강후기 · 문의하기 — 기본은 1단이라 비주얼 자리를 다시 엽니다 */
+.hero-sm .hero-inner:has(.hero-visual svg),
+.hero-sm2 .hero-inner:has(.hero-visual svg) { grid-template-columns: 1.05fr .95fr; }
+.hero-sm .hero-visual:has(svg),
+.hero-sm2 .hero-visual:has(svg) { max-width: 320px; }
+
+@media (max-width: 1080px) {
+  .hero-sm .hero-inner:has(.hero-visual svg),
+  .hero-sm2 .hero-inner:has(.hero-visual svg) { grid-template-columns: 1fr; }
+  .hero-visual:has(svg) { max-width: 300px; margin: 0 auto; }
+}
+/* ponytail: 모바일은 글자가 우선이라 선화를 숨김. 보여 달라면 max-width 만 줄여서 살리면 됨 */
+@media (max-width: 767px) {
+  .hero-visual:has(svg) { display: none; }
+}

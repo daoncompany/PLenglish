@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문의하기 | PL어학원</title>
+<meta name="description" content="이름 · 이메일 · 연락처와 수강문의 내용을 남겨주시면 담당자가 메일 확인 후 빠르게 회신드립니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/css/style.css?v=20261015">
+<link rel="stylesheet" href="assets/css/hero.css?v=20261015">
+<meta name="robots" content="noindex">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="page-contact">
+<script src="../assets/js/layout.js?v=20261015"></script>
+
+<main>
+<section class="hero hero-sm2">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="inner hero-inner">
+      <div class="hero-copy">
+        <span class="hero-badge">CONTACT</span>
+        <!-- 타이틀 후킹문구 -->
+        <h1 class="hero-title">등록 전에<br>내 수준부터 확인하세요</h1>
+        <!-- 서브 보조문구 -->
+        <p class="hero-sub">무료 레벨테스트 신청</p>
+        <ul class="hero-chips">
+          <li>매일 10:00 ~ 22:00</li>
+          <li>접수 후 1영업일 내 회신</li>
+        </ul>
+      </div>
+    <div class="hero-visual"><svg class="hv" viewBox="0 0 200 200" aria-hidden="true"><rect x="26" y="74" width="128" height="88" rx="12"/><path d="M28 82l62 46 62-46"/><rect class="a" x="120" y="26" width="58" height="42" rx="13"/><path class="a" d="M134 68l-5 12 16-12"/><circle class="f" cx="137" cy="47" r="4"/><circle class="f" cx="149" cy="47" r="4"/><circle class="f" cx="161" cy="47" r="4"/></svg></div>
+    </div>
+  </section>
+
+  <section class="sec sec-form">
+    <div class="inner">
+      <div class="form-grid">
+        <!-- ======================= 문의 폼 ======================= -->
+        <div class="form-box reveal">
+          <div class="form-head">
+            <span class="sec-label">ONLINE INQUIRY</span>
+            <h2>문의 폼 작성</h2>
+            <p>아래 내용을 작성해 주시면 학원 담당 메일로 발송됩니다.</p>
+          </div>
+
+          <form id="inquiryForm" novalidate>
+            <div class="field">
+              <label for="fName">Name <span>(이름)</span> <em class="req">*</em></label>
+              <input type="text" id="fName" name="name" placeholder="성함을 입력해 주세요" autocomplete="name" required>
+              <p class="err" data-for="fName"></p>
+            </div>
+
+            <div class="field">
+              <label for="fEmail">E-mail <span>(이메일)</span> <em class="req">*</em></label>
+              <input type="email" id="fEmail" name="email" placeholder="example@email.com" autocomplete="email" required>
+              <p class="err" data-for="fEmail"></p>
+            </div>
+
+            <div class="field">
+              <label for="fPhone">C.P <span>(핸드폰)</span> <em class="req">*</em></label>
+              <input type="tel" id="fPhone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric" required>
+              <p class="err" data-for="fPhone"></p>
+            </div>
+
+            <div class="field">
+              <label for="fCallFrom">Call time <span>(통화가능시간)</span> <em class="req">*</em></label>
+              <div class="time-range">
+                <select id="fCallFrom" name="callFrom" aria-label="통화가능시간 시작"></select>
+                <span class="time-sep" aria-hidden="true">~</span>
+                <select id="fCallTo" name="callTo" aria-label="통화가능시간 끝"></select>
+              </div>
+              <p class="field-hint">통화하기 편한 시간대를 골라주세요. 시간대가 정해져 있지 않다면 <b>언제든 가능</b>을 선택하시면 됩니다. (매일 10:00~22:00)</p>
+              <p class="err" data-for="fCallFrom"></p>
+            </div>
+
+            <div class="field">
+              <label for="fMessage">Counsel about classes <span>(수강문의)</span> <em class="req">*</em></label>
+              <textarea id="fMessage" name="message" rows="8" placeholder="원하시는 과목, 현재 수준, 희망 요일 · 시간대를 함께 적어주시면 더 정확하게 안내드릴 수 있습니다."required></textarea>
+              <p class="err" data-for="fMessage"></p>
+            </div>
+
+            <p class="form-notice"><strong>전화번호와 통화가능시간을 남겨주시면 가장 빠르게 상담받으실 수 있습니다.</strong></p>
+
+            <label class="agree" for="fAgree">
+              <input type="checkbox" id="fAgree" required>
+              <span>상담을 위한 개인정보(이름 · 이메일 · 연락처) 수집 및 이용에 동의합니다. <em class="req">*</em></span>
+            </label>
+            <p class="err" data-for="fAgree"></p>
+
+            <div class="form-btns">
+              <button type="submit" class="btn btn-red btn-lg">메일로 문의 보내기</button>
+              <button type="reset" class="btn btn-line btn-lg">다시 작성</button>
+            </div>
+            <p class="form-help">전송 버튼을 누르면 작성하신 내용이 담긴 메일 작성 창이 열립니다. 메일 프로그램에서 <b>보내기</b>까지 눌러주세요.</p>
+
+            <!-- 전송 결과 안내 (contact.js 가 채웁니다) -->
+            <div class="form-result" id="formResult" role="status" aria-live="polite" hidden></div>
+          </form>
+        </div>
+
+        <!-- ======================= 안내 ======================= -->
+        <aside class="form-side reveal">
+          <div class="side-card">
+            <h3>바로 상담하기</h3>
+            <a href="tel:0325443352" class="side-btn"><span>전화 상담</span><b>032-544-3352</b></a>
+            <a href="#" class="side-btn kakao"><span>카카오톡 상담</span><b>1:1 채팅 열기</b></a>
+            <ul class="side-info">
+              <li><strong>운영시간</strong> 매일 10:00 ~ 22:00</li>
+              <li><strong>휴무</strong> 일요일 · 공휴일</li>
+              <li><strong>주소</strong> 인천 계양구 계산동 917-11 태영빌딩 2층</li>
+            </ul>
+          </div>
+
+          <div class="side-card side-guide">
+            <h3>이렇게 진행됩니다</h3>
+            <ol class="side-steps">
+              <li><b>01</b> 문의 접수 (메일 · 전화 · 카톡)</li>
+              <li><b>02</b> 담당 선생님 회신 · 방문 일정 조율</li>
+              <li><b>03</b> 무료 레벨테스트 &amp; 상담</li>
+              <li><b>04</b> 커리큘럼 · 시간표 확정 후 수업 시작</li>
+            </ol>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>PL.footer();</script>
+<script src="../assets/js/common.js?v=20261015"></script>
+<script src="../assets/js/contact.js?v=20261015"></script>
+</body>
+</html>

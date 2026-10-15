@@ -146,6 +146,6 @@
     );
   }
 
-  window.PL = { header: header, footer: footer, timetable: timetable };
+  window.PL = { header: header, footer: footer, timetable: timetable, kakao: KAKAO };
   header();   // 이 스크립트가 놓인 자리에 헤더를 출력
 })();
