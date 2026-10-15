@@ -21,6 +21,10 @@
 .hv .f { fill: var(--red); stroke: none; }
 .hv .e { fill: var(--ink); stroke: none; }
 
+/* V3 플랫 일러스트 — 면 채움 + 가는 외곽선, 배경 원은 웜 베이지 */
+.hv.il { stroke: #2b2233; stroke-width: 1.2; }
+.hero-visual:has(.il)::before { inset: 2%; background: #f6e9df; }
+
 /* 수강후기 · 문의하기 — 기본은 1단이라 비주얼 자리를 다시 엽니다 */
 .hero-sm .hero-inner:has(.hero-visual svg),
 .hero-sm2 .hero-inner:has(.hero-visual svg) { grid-template-columns: 1.05fr .95fr; }
