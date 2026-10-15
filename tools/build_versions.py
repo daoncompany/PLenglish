@@ -20,11 +20,12 @@ for folder, (copy_ver, art) in JOBS.items():
         s = re.sub(r'(<link rel="stylesheet" href="\.\./assets/css/style\.css\?v=[^"]+">)',
                    rf'\1\n<link rel="stylesheet" href="assets/css/hero.css?v={ver}">\n<meta name="robots" content="noindex">', s, count=1)
         if page in art:
-            svg = f'<svg class="hv" viewBox="0 0 200 200" aria-hidden="true">{art[page]}</svg>'
+            cls = 'hv il' if folder == 'v3' else 'hv'  # il = 면 채움 플랫 일러스트
+            svg = f'<svg class="{cls}" viewBox="0 0 200 200" aria-hidden="true">{art[page]}</svg>'
             if '<div class="hero-visual">' in s:
                 s = re.sub(r'<div class="hero-visual">\s*</div>', f'<div class="hero-visual">{svg}</div>', s, count=1)
             else:  # index · reviews · contact — hero-copy 뒤에 자리 추가
                 s = re.sub(r'(<ul class="hero-chips">.*?</ul>\s*</div>)', rf'\1\n    <div class="hero-visual">{svg}</div>', s, count=1, flags=re.S)
-            assert 'class="hv"' in s, (folder, page)
+            assert 'class="hv' in s, (folder, page)
         (out / src.name).write_text(s, encoding='utf-8')
     subprocess.run([sys.executable, str(here / 'apply_copy.py'), copy_ver, str(out)], check=True)
