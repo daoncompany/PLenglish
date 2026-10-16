@@ -30,7 +30,24 @@
   .hero:has(.hero-visual .hv) .hero-inner { padding-top: 404px; }
   .hero .hero-visual:has(.hv) { width: 380px; }
 }
+/* V3 일러스트(img.hv) — 세로 태블릿은 가운데에 더 크게, 글은 그 아래 (겹치지 않음) */
+@media (max-width: 1080px) and (min-height: 960px) {
+  .hero:has(.hero-visual img.hv) .hero-inner { padding-top: 444px; }
+  .hero .hero-visual:has(img.hv) { left: 50%; right: auto; transform: translateX(-50%); width: 420px; }
+}
 @media (max-width: 767px) {
   .hero:has(.hero-visual .hv) .hero-inner { padding-top: 188px; }
-  .hero .hero-visual:has(.hv) { top: 4px; right: -34px; width: 280px; }
+  .hero .hero-visual:has(.hv) { top: 4px; right: 8px; width: 280px; }   /* 화면 안에 — 오른쪽 잘림 없음 */
+  /* V3 일러스트 — 모바일은 가운데에 크게 */
+  .hero:has(.hero-visual img.hv) .hero-inner { padding-top: 200px; }
+  .hero .hero-visual:has(img.hv) { left: 50%; right: auto; transform: translateX(-50%); width: 320px; }
+}
+/* 키 작은 휴대폰(높이 760px 이하) — 그림을 줄이고 글을 올려 한 화면에 */
+@media (max-width: 767px) and (max-height: 760px) {
+  .hero:has(.hero-visual .hv) .hero-inner,
+  .hero:has(.hero-visual img.hv) .hero-inner { padding-top: 104px; }
+  .hero .hero-visual:has(.hv) { width: 220px; }
+  /* V3 — 다른 화면과 같은 구도(그림 위 · 글 아래)를 유지 */
+  .hero:has(.hero-visual img.hv) .hero-inner { padding-top: 196px; }
+  .hero .hero-visual:has(img.hv) { width: 260px; }
 }
