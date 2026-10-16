@@ -9,6 +9,7 @@
   function onScroll() {
     var y = window.pageYOffset || document.documentElement.scrollTop;
     if (hd) hd.classList.toggle('is-scroll', y > 10);
+    document.body.classList.toggle('past-hero', y > 300);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
