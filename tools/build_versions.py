@@ -3,9 +3,14 @@
 import re, sys, pathlib, shutil, subprocess
 here = pathlib.Path(__file__).parent
 sys.path.insert(0, str(here))
-from art import PICTO, ILLUST
 
 root, ver = pathlib.Path(sys.argv[1]), sys.argv[2]
+# V2 픽토그램 원본 = tools/picto/NN_페이지.svg (피그마 내보내기 그대로). 고칠 땐 이 파일만 교체 후 재실행
+PICTO = {f.stem.split('_', 1)[1]: re.sub(r'<svg [^>]*>', '<svg class="hv" viewBox="0 0 400 400" fill="none" aria-hidden="true">', f.read_text(encoding='utf-8').strip(), count=1)
+         for f in sorted((here / 'picto').glob('*.svg'))}
+# V3 일러스트 = v3/assets/img/hero/페이지.webp (홈페이지자료/v3 일러스트 PNG 를 webp 로 변환해 둔 것)
+ILLUST = {f.stem: f'<img class="hv" src="assets/img/hero/{f.name}?v={ver}" alt="" width="1024" height="1024" decoding="async">'
+          for f in sorted((root / 'v3/assets/img/hero').glob('*.webp'))}
 JOBS = {'v2': ('C', PICTO), 'v3': ('D', ILLUST)}
 
 for folder, (copy_ver, art) in JOBS.items():
@@ -20,7 +25,7 @@ for folder, (copy_ver, art) in JOBS.items():
         s = re.sub(r'(<link rel="stylesheet" href="\.\./assets/css/style\.css\?v=[^"]+">)',
                    rf'\1\n<link rel="stylesheet" href="assets/css/hero.css?v={ver}">\n<meta name="robots" content="noindex">', s, count=1)
         if page in art:
-            svg = f'<svg class="hv" viewBox="0 0 200 200" aria-hidden="true">{art[page]}</svg>'
+            svg = art[page]
             if '<div class="hero-visual">' in s:
                 s = re.sub(r'<div class="hero-visual">\s*</div>', f'<div class="hero-visual">{svg}</div>', s, count=1)
             else:  # index · reviews · contact — hero-copy 뒤에 자리 추가

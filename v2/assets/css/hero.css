@@ -1,37 +1,36 @@
 @charset "utf-8";
 /* 시안 버전 히어로 — 공통 style.css 다음에 읽어서 히어로 비주얼만 덮어씁니다.
-   hero-visual 안에 SVG 가 있는 페이지만 사진을 끄고 선화를 보여줍니다. */
+   hero-visual 안에 .hv(V2 픽토그램 SVG · V3 일러스트 이미지)가 있는 페이지만 사진을 끄고 그림을 보여줍니다. */
 
-.hero:has(.hero-visual svg) .hero-bg { display: none; }
-.hero:has(.hero-visual svg) { background: linear-gradient(180deg, #fff 0%, var(--bg-soft) 100%); }
+.hero:has(.hero-visual .hv) .hero-bg { display: none; }
+.hero:has(.hero-visual .hv) { background: linear-gradient(180deg, #fff 0%, var(--bg-soft) 100%); }
 
-.hero-visual:has(svg) {
+.hero-visual:has(.hv) {
   display: block; position: relative;
-  width: 100%; max-width: 440px; aspect-ratio: 1; margin-left: auto;
+  width: 100%; max-width: 520px; aspect-ratio: 1; margin-left: auto;
 }
-.hero-visual:has(svg)::before {
-  content: ''; position: absolute; inset: 6%;
-  border-radius: 50%; background: var(--red-soft);
-}
-.hv {
-  position: relative; width: 100%; height: 100%; display: block;
-  fill: none; stroke: var(--ink); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round;
-}
-.hv .a { stroke: var(--red); }
-.hv .f { fill: var(--red); stroke: none; }
+/* 픽토그램 SVG 는 바탕 원 · 색 · 선 굵기를 파일 안에 다 갖고 있음 (tools/picto/) */
+.hv { width: 100%; height: 100%; display: block; object-fit: contain; }
 
 /* 수강후기 · 문의하기 — 기본은 1단이라 비주얼 자리를 다시 엽니다 */
-.hero-sm .hero-inner:has(.hero-visual svg),
-.hero-sm2 .hero-inner:has(.hero-visual svg) { grid-template-columns: 1.05fr .95fr; }
-.hero-sm .hero-visual:has(svg),
-.hero-sm2 .hero-visual:has(svg) { max-width: 320px; }
+.hero-sm .hero-inner:has(.hero-visual .hv),
+.hero-sm2 .hero-inner:has(.hero-visual .hv) { grid-template-columns: 1.05fr .95fr; }
+.hero-sm .hero-visual:has(.hv),
+.hero-sm2 .hero-visual:has(.hv) { max-width: 400px; }
 
+/* 태블릿 · 모바일 — 픽토그램을 오른쪽 위에 크게 깔고, 글은 그 위로.
+   제목 뒤 흰 그라데이션은 공통 style.css 의 1080px 구간에 있음 (V1 사진과 같은 규칙) */
 @media (max-width: 1080px) {
-  .hero-sm .hero-inner:has(.hero-visual svg),
-  .hero-sm2 .hero-inner:has(.hero-visual svg) { grid-template-columns: 1fr; }
-  .hero-visual:has(svg) { max-width: 300px; margin: 0 auto; }
+  .hero:has(.hero-visual .hv) .hero-inner { display: block; padding-top: 128px; }
+  .hero .hero-visual:has(.hv) { position: absolute; z-index: 0; top: 20px; right: 16px; width: 340px; max-width: none; margin: 0; }
+  .hero:has(.hero-visual .hv) .hero-copy { position: relative; z-index: 1; }
 }
-/* ponytail: 모바일은 글자가 우선이라 선화를 숨김. 보여 달라면 max-width 만 줄여서 살리면 됨 */
+/* 세로 태블릿처럼 화면이 충분히 길면 그림을 키우고 글을 그 아래로 (겹치지 않음) */
+@media (max-width: 1080px) and (min-height: 960px) {
+  .hero:has(.hero-visual .hv) .hero-inner { padding-top: 404px; }
+  .hero .hero-visual:has(.hv) { width: 380px; }
+}
 @media (max-width: 767px) {
-  .hero-visual:has(svg) { display: none; }
+  .hero:has(.hero-visual .hv) .hero-inner { padding-top: 188px; }
+  .hero .hero-visual:has(.hv) { top: 4px; right: -34px; width: 280px; }
 }

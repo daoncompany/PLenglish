@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "assets/css/style.css"
+        ],
+        "createdAt": "2026-10-16T01:39:16.085Z",
+        "reason": "User confirmed: .about-lead 인용선, .st-card 호버 상단 띠는 의도한 디자인 (2026-10-16)"
+      }
+    ]
+  }
+}

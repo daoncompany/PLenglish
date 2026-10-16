@@ -55,7 +55,6 @@
       '    ' + LOGO.replace('{cls}', '') + '\n' +
       '    <nav class="gnb" id="gnb">\n' +
       '      <ul>\n        ' + menu + '\n      </ul>\n' +
-      '      <a href="contact.html" class="btn btn-red gnb-cta">무료 상담 문의</a>\n' +
       '    </nav>\n' +
       '    <div class="hd-util">\n' +
       '      <a href="' + TEL_HREF + '" class="hd-tel"><b>' + TEL + '</b><em>' + HOURS + '</em></a>\n' +
