@@ -174,18 +174,18 @@ body {
 :root { --hero-img: none; }
 
 .page-main           { --hero-img: url('../img/hero/index.webp'); }         /* 메인 */
-.page-conversation   { --hero-img: url('../img/hero/conversation.webp'); }   /* 영어회화 */
-.page-workingholiday { --hero-img: url('../img/hero/workingholiday.webp'); } /* 워홀대비반 */
-.page-interview      { --hero-img: url('../img/hero/interview.webp'); }      /* 영어인터뷰 */
-.page-ielts          { --hero-img: url('../img/hero/ielts.webp'); }          /* 아이엘츠 */
-.page-toefl          { --hero-img: url('../img/hero/toefl.webp'); }          /* 토플 */
-.page-opic           { --hero-img: url('../img/hero/opic.webp'); }           /* 오픽 */
-.page-toeic          { --hero-img: url('../img/hero/toeic.webp'); }          /* 토익 */
-.page-toeic-speaking { --hero-img: url('../img/hero/toeic-speaking.webp'); } /* 토스 */
-.page-certification  { --hero-img: url('../img/hero/certification.webp'); }  /* 인증시험 — 전용 사진 준비되면 교체 */
-.page-gtelp          { --hero-img: url('../img/hero/gtelp.webp'); }          /* 지텔프 — 전용 사진 준비되면 교체 */
-.page-duolingo       { --hero-img: url('../img/hero/duolingo.webp'); }       /* 듀오링고 */
-.page-reviews        { --hero-img: url('../img/hero/reviews.webp'); }        /* 수강후기 */
+.page-conversation   { --hero-img: url('../img/hero/conversation.webp?v=20261016'); }   /* 영어회화 */
+.page-workingholiday { --hero-img: url('../img/hero/workingholiday.webp?v=20261016'); } /* 워홀대비반 */
+.page-interview      { --hero-img: url('../img/hero/interview.webp?v=20261016'); }      /* 영어인터뷰 */
+.page-ielts          { --hero-img: url('../img/hero/ielts.webp?v=20261016'); }          /* 아이엘츠 */
+.page-toefl          { --hero-img: url('../img/hero/toefl.webp?v=20261016'); }          /* 토플 */
+.page-opic           { --hero-img: url('../img/hero/opic.webp?v=20261016'); }           /* 오픽 */
+.page-toeic          { --hero-img: url('../img/hero/toeic.webp?v=20261016'); }          /* 토익 */
+.page-toeic-speaking { --hero-img: url('../img/hero/toeic-speaking.webp?v=20261016'); } /* 토스 */
+.page-certification  { --hero-img: url('../img/hero/certification.webp?v=20261016'); }  /* 인증시험 */
+.page-gtelp          { --hero-img: url('../img/hero/gtelp.webp?v=20261016'); }          /* 지텔프 */
+.page-duolingo       { --hero-img: url('../img/hero/duolingo.webp?v=20261016'); }       /* 듀오링고 */
+.page-reviews        { --hero-img: url('../img/hero/reviews.webp?v=20261016'); }        /* 수강후기 */
 .page-contact        { --hero-img: url('../img/hero/contact.webp?v=20261016b'); }        /* 문의하기 */
 
 /* 히어로 배경 레이어 — 반드시 absolute + inset:0 이어야 화면을 채웁니다.
@@ -193,7 +193,11 @@ body {
    background 는 "먼저 쓴 것이 위" — 쓰는 순서가 곧 레이어 순서입니다.     */
 .hero-bg {
   position: absolute; inset: 0;
-  background: var(--hero-img) no-repeat right center / cover;
+  /* 위: 글 쪽(왼쪽 절반) 흰 그라데이션 — 사진 인물이 왼쪽까지 와도 제목이 구별되게. 아래: 사진.
+     화면 가운데(50%) 기준이라 넓은 화면에서도 글 영역을 따라감. 태블릿 · 모바일은 1080px 구간에서 따로 */
+  background:
+    linear-gradient(90deg, #fff 0, rgba(255, 255, 255, .9) calc(50% - 120px), rgba(255, 255, 255, 0) calc(50% + 160px)),
+    var(--hero-img) no-repeat right center / cover;
 }
 
 .hero-visual { display: none; }
