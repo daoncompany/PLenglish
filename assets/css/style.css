@@ -173,7 +173,7 @@ body {
    ========================================================================== */
 :root { --hero-img: none; }
 
-.page-main           { --hero-img: url('../img/hero/index.webp'); }         /* 메인 */
+.page-main           { --hero-img: url('../img/hero/index.webp?v=20261019b'); }         /* 메인 */
 .page-conversation   { --hero-img: url('../img/hero/conversation.webp?v=20261016'); }   /* 영어회화 */
 .page-workingholiday { --hero-img: url('../img/hero/workingholiday.webp?v=20261016'); } /* 워홀대비반 */
 .page-interview      { --hero-img: url('../img/hero/interview.webp?v=20261016'); }      /* 영어인터뷰 */
