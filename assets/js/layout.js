@@ -6,7 +6,7 @@
   var TEL      = '032-544-3352';
   var TEL_HREF = 'tel:' + TEL.replace(/-/g, '');
   var HOURS    = '매일 10:00 ~ 22:00';
-  var KAKAO    = '#';                 // 카카오톡 채널 링크로 교체
+  var KAKAO    = 'https://pf.kakao.com/_QhemX/chat';   // 카카오톡 채널 1:1 채팅
   var BRAND    = 'PL어학원';
 
   /* 대메뉴 — [주소, 이름, 소메뉴] */
@@ -20,10 +20,8 @@
     ['opic.html',           '오픽'],
     ['toeic.html',          '토익'],
     ['toeic-speaking.html', '토스'],
-    ['certification.html',  '인증시험', [
-      ['gtelp.html',          '지텔프'],
-      ['duolingo.html',       '듀오링고']
-    ]],
+    ['gtelp.html',          '지텔프'],
+    ['duolingo.html',       '듀오링고'],
     ['reviews.html',        '수강후기'],
     ['contact.html',        '문의하기']
   ];

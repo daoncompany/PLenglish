@@ -41,7 +41,7 @@
   }
 
   /* 카카오 링크 — layout.js 의 KAKAO 한 곳만 바꾸면 본문 버튼까지 따라갑니다 */
-  if (window.PL) document.querySelectorAll('a.kakao').forEach(function (a) { a.href = PL.kakao; });
+  if (window.PL) document.querySelectorAll('a.kakao').forEach(function (a) { a.href = PL.kakao; a.target = '_blank'; a.rel = 'noopener'; });
 
   /* 스크롤 등장 효과 */
   var targets = document.querySelectorAll('.reveal');
