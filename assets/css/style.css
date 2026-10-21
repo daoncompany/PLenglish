@@ -488,7 +488,7 @@ body {
 .sec-course { background: #fff; }
 .course-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }   /* 과목 10개 — PC 5열 × 2줄 */
 .course-card {
-  display: block; position: relative; padding: 34px 24px 30px; border-radius: var(--radius);
+  display: flex; flex-direction: column; position: relative; padding: 34px 24px 30px; border-radius: var(--radius);
   background: var(--bg-soft); border: 1px solid transparent; overflow: hidden;
   transition: transform .3s ease, box-shadow .3s ease, background-color .3s ease;
 }
@@ -502,11 +502,12 @@ body {
 .cc-ico svg { width: 28px; height: 28px; stroke: var(--red); stroke-width: 1.7; }
 .course-card:hover .cc-ico { background: var(--red); border-color: var(--red); transform: translateY(-2px); }
 .course-card:hover .cc-ico svg { stroke: #fff; }
-.cc-eng { display: block; font-size: 12px; font-weight: 800; letter-spacing: .08em; color: var(--red); }
+/* 라벨이 1줄 · 2줄로 달라도 제목 높이가 맞도록 늘 2줄 자리를 잡고 아래에 붙임 */
+.cc-eng { display: flex; align-items: flex-end; min-height: 3.2em; font-size: 12px; font-weight: 800; letter-spacing: .08em; line-height: 1.6; color: var(--red); }
 .course-card h3 { margin-top: 8px; font-size: 25px; font-weight: 800; letter-spacing: -.045em; }
-.course-card p { margin-top: 10px; font-size: 15.5px; color: var(--gray-600); }
+.course-card p { flex: 1; margin-top: 10px; font-size: 15.5px; color: var(--gray-600); }   /* 설명이 늘어나도 '자세히 보기'는 맨 아래 */
 .cc-more {
-  display: inline-flex; align-items: center; gap: 6px; margin-top: 28px;
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; margin-top: 28px;
   font-size: 15px; font-weight: 700; color: var(--ink);
 }
 .cc-more::after {
